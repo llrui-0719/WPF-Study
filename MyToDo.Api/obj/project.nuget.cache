@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "+24B3vkI1fTgxsLJJ4j7A/nx65U5JYr/VfydWN6H21dmHqzC6eeWEtfnTQnPcNY5kpbj1f0OVqr5FkFiGuhSrw==",
+  "dgSpecHash": "q73ajP4cxSPi+2DiTF+sIZjZyDzcNVw4mY/DbTrXyZn2sPtdaAet/FGD8Lu/hT5xyGbyLcuxtt0Z22keaz9Yrw==",
   "success": true,
   "projectFilePath": "D:\\Study\\Company_Study\\C_Sharp_Company_Study\\wpf\\MyToDo\\MyToDo.Api\\MyToDo.Api.csproj",
   "expectedPackageFiles": [
@@ -11,6 +11,7 @@
     "C:\\Users\\ksat\\.nuget\\packages\\microsoft.entityframeworkcore\\5.0.9\\microsoft.entityframeworkcore.5.0.9.nupkg.sha512",
     "C:\\Users\\ksat\\.nuget\\packages\\microsoft.entityframeworkcore.abstractions\\5.0.9\\microsoft.entityframeworkcore.abstractions.5.0.9.nupkg.sha512",
     "C:\\Users\\ksat\\.nuget\\packages\\microsoft.entityframeworkcore.analyzers\\5.0.9\\microsoft.entityframeworkcore.analyzers.5.0.9.nupkg.sha512",
+    "C:\\Users\\ksat\\.nuget\\packages\\microsoft.entityframeworkcore.autohistory\\5.0.7\\microsoft.entityframeworkcore.autohistory.5.0.7.nupkg.sha512",
     "C:\\Users\\ksat\\.nuget\\packages\\microsoft.entityframeworkcore.design\\5.0.9\\microsoft.entityframeworkcore.design.5.0.9.nupkg.sha512",
     "C:\\Users\\ksat\\.nuget\\packages\\microsoft.entityframeworkcore.relational\\5.0.9\\microsoft.entityframeworkcore.relational.5.0.9.nupkg.sha512",
     "C:\\Users\\ksat\\.nuget\\packages\\microsoft.entityframeworkcore.sqlite\\5.0.9\\microsoft.entityframeworkcore.sqlite.5.0.9.nupkg.sha512",

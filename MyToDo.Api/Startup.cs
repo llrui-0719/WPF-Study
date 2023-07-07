@@ -8,6 +8,8 @@ using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Microsoft.OpenApi.Models;
 using MyToDo.Api.Context;
+using MyToDo.Api.Context.Repository;
+using MyToDo.Api.Context.UnitOfWork;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -31,7 +33,10 @@ namespace MyToDo.Api
             {
                 var connectionString = Configuration.GetConnectionString("ToDoConnection");
                 option.UseSqlite(connectionString);
-            });
+            }).AddUnitOfWork<MyToDoContext>()
+            .AddCustomRepository<ToDo,ToDoRepository>()
+            .AddCustomRepository<Memo,MemoRepository>()
+            .AddCustomRepository<User,UserRepository>();
             services.AddControllers();
             services.AddSwaggerGen(c =>
             {

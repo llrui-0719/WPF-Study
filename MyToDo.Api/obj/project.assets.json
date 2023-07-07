@@ -78,6 +78,18 @@
           "lib/netstandard2.0/_._": {}
         }
       },
+      "Microsoft.EntityFrameworkCore.AutoHistory/5.0.7": {
+        "type": "package",
+        "dependencies": {
+          "Microsoft.EntityFrameworkCore.Relational": "5.0.7"
+        },
+        "compile": {
+          "lib/net5.0/Microsoft.EntityFrameworkCore.AutoHistory.dll": {}
+        },
+        "runtime": {
+          "lib/net5.0/Microsoft.EntityFrameworkCore.AutoHistory.dll": {}
+        }
+      },
       "Microsoft.EntityFrameworkCore.Design/5.0.9": {
         "type": "package",
         "dependencies": {
@@ -464,6 +476,16 @@
         "runtime": {
           "lib/netcoreapp2.1/_._": {}
         }
+      },
+      "MyToDo.Shared/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v5.0",
+        "compile": {
+          "bin/placeholder/MyToDo.Shared.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/MyToDo.Shared.dll": {}
+        }
       }
     }
   },
@@ -627,6 +649,19 @@
         "lib/netstandard2.0/_._",
         "microsoft.entityframeworkcore.analyzers.5.0.9.nupkg.sha512",
         "microsoft.entityframeworkcore.analyzers.nuspec"
+      ]
+    },
+    "Microsoft.EntityFrameworkCore.AutoHistory/5.0.7": {
+      "sha512": "iPJ34pQT5U2WqyJGcWk6eOLv+MtdSIYJajtHzIzhSzPmUVmKbetr0ROEFsCnnATbAjodmYouX0BRAw5nRwOFqA==",
+      "type": "package",
+      "path": "microsoft.entityframeworkcore.autohistory/5.0.7",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "lib/net5.0/Microsoft.EntityFrameworkCore.AutoHistory.dll",
+        "lib/net5.0/Microsoft.EntityFrameworkCore.AutoHistory.xml",
+        "microsoft.entityframeworkcore.autohistory.5.0.7.nupkg.sha512",
+        "microsoft.entityframeworkcore.autohistory.nuspec"
       ]
     },
     "Microsoft.EntityFrameworkCore.Design/5.0.9": {
@@ -1245,12 +1280,19 @@
         "useSharedDesignerContext.txt",
         "version.txt"
       ]
+    },
+    "MyToDo.Shared/1.0.0": {
+      "type": "project",
+      "path": "../MyToDo.Shared/MyToDo.Shared.csproj",
+      "msbuildProject": "../MyToDo.Shared/MyToDo.Shared.csproj"
     }
   },
   "projectFileDependencyGroups": {
     "net5.0": [
+      "Microsoft.EntityFrameworkCore.AutoHistory >= 5.0.7",
       "Microsoft.EntityFrameworkCore.Design >= 5.0.9",
       "Microsoft.EntityFrameworkCore.Sqlite >= 5.0.9",
+      "MyToDo.Shared >= 1.0.0",
       "Swashbuckle.AspNetCore >= 5.6.3"
     ]
   },
@@ -1285,7 +1327,11 @@
       "frameworks": {
         "net5.0": {
           "targetAlias": "net5.0",
-          "projectReferences": {}
+          "projectReferences": {
+            "D:\\Study\\Company_Study\\C_Sharp_Company_Study\\wpf\\MyToDo\\MyToDo.Shared\\MyToDo.Shared.csproj": {
+              "projectPath": "D:\\Study\\Company_Study\\C_Sharp_Company_Study\\wpf\\MyToDo\\MyToDo.Shared\\MyToDo.Shared.csproj"
+            }
+          }
         }
       },
       "warningProperties": {
@@ -1298,6 +1344,10 @@
       "net5.0": {
         "targetAlias": "net5.0",
         "dependencies": {
+          "Microsoft.EntityFrameworkCore.AutoHistory": {
+            "target": "Package",
+            "version": "[5.0.7, )"
+          },
           "Microsoft.EntityFrameworkCore.Design": {
             "include": "Runtime, Build, Native, ContentFiles, Analyzers, BuildTransitive",
             "suppressParent": "All",
