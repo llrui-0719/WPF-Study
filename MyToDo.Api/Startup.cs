@@ -42,6 +42,7 @@ namespace MyToDo.Api
             .AddCustomRepository<User,UserRepository>();
 
             services.AddTransient<IToDoService, ToDoService>();
+            services.AddTransient<IMemoService, MemoService>();
 
             //ÅäÖÃÌí¼Óautomapper
             var automapperConfig = new MapperConfiguration(config =>

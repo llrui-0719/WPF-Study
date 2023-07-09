@@ -3,6 +3,7 @@ using MyToDo.Api.Context;
 using MyToDo.Api.Context.UnitOfWork;
 using MyToDo.Api.Service;
 using MyToDo.Shared.Dtos;
+using MyToDo.Shared.Parameter;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -28,7 +29,7 @@ namespace MyToDo.Api.Controllers
         public async Task<ApiResponse> Get(int id) =>await service.GetSingleAsync(id);
 
         [HttpGet]
-        public async Task<ApiResponse> GetAll() => await service.GetAllAsync();
+        public async Task<ApiResponse> GetAll([FromQuery]QueryParameter query) => await service.GetAllAsync(query);
 
         [HttpPost]
         public async Task<ApiResponse> Add([FromBody]ToDoDto model) => await service.AddAsync(model);
