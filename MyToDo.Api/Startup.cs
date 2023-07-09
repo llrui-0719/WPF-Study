@@ -1,3 +1,4 @@
+using AutoMapper;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
@@ -10,6 +11,8 @@ using Microsoft.OpenApi.Models;
 using MyToDo.Api.Context;
 using MyToDo.Api.Context.Repository;
 using MyToDo.Api.Context.UnitOfWork;
+using MyToDo.Api.Extensions;
+using MyToDo.Api.Service;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -37,6 +40,16 @@ namespace MyToDo.Api
             .AddCustomRepository<ToDo,ToDoRepository>()
             .AddCustomRepository<Memo,MemoRepository>()
             .AddCustomRepository<User,UserRepository>();
+
+            services.AddTransient<IToDoService, ToDoService>();
+
+            //ÅäÖÃÌí¼Óautomapper
+            var automapperConfig = new MapperConfiguration(config =>
+              {
+                  config.AddProfile(new AutoMapperProfile());
+              });
+            services.AddSingleton(automapperConfig.CreateMapper());
+
             services.AddControllers();
             services.AddSwaggerGen(c =>
             {

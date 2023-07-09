@@ -55,3 +55,7 @@ D:\Study\Company_Study\C_Sharp_Company_Study\wpf\MyToDo\MyToDo.Api\bin\Debug\net
 D:\Study\Company_Study\C_Sharp_Company_Study\wpf\MyToDo\MyToDo.Api\bin\Debug\net5.0\runtimes\win-x86\native\e_sqlite3.dll
 D:\Study\Company_Study\C_Sharp_Company_Study\wpf\MyToDo\MyToDo.Api\bin\Debug\net5.0\Humanizer.dll
 D:\Study\Company_Study\C_Sharp_Company_Study\wpf\MyToDo\MyToDo.Api\bin\Debug\net5.0\Microsoft.EntityFrameworkCore.Design.dll
+D:\Study\Company_Study\C_Sharp_Company_Study\wpf\MyToDo\MyToDo.Api\bin\Debug\net5.0\Microsoft.EntityFrameworkCore.AutoHistory.dll
+D:\Study\Company_Study\C_Sharp_Company_Study\wpf\MyToDo\MyToDo.Api\bin\Debug\net5.0\MyToDo.Shared.dll
+D:\Study\Company_Study\C_Sharp_Company_Study\wpf\MyToDo\MyToDo.Api\bin\Debug\net5.0\MyToDo.Shared.pdb
+D:\Study\Company_Study\C_Sharp_Company_Study\wpf\MyToDo\MyToDo.Api\bin\Debug\net5.0\AutoMapper.dll
