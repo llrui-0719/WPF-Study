@@ -82,3 +82,5 @@ D:\Study\Company_Study\C_Sharp_Company_Study\wpf\MyToDo\MyToDo\bin\Debug\net5.0-
 D:\Study\Company_Study\C_Sharp_Company_Study\wpf\MyToDo\MyToDo\bin\Debug\net5.0-windows\Newtonsoft.Json.dll
 D:\Study\Company_Study\C_Sharp_Company_Study\wpf\MyToDo\MyToDo\bin\Debug\net5.0-windows\MyToDo.Shared.dll
 D:\Study\Company_Study\C_Sharp_Company_Study\wpf\MyToDo\MyToDo\bin\Debug\net5.0-windows\MyToDo.Shared.pdb
+D:\Study\Company_Study\C_Sharp_Company_Study\wpf\MyToDo\MyToDo\obj\Debug\net5.0-windows\Views\LoadingView.g.cs
+D:\Study\Company_Study\C_Sharp_Company_Study\wpf\MyToDo\MyToDo\obj\Debug\net5.0-windows\Views\LoadingView.baml

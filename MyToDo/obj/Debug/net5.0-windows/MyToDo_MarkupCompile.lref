@@ -1,4 +1,4 @@
-﻿D:\Study\Company_Study\C_Sharp_Company_Study\wpf\MyToDo\MyToDo\obj\Debug\net5.0-windows\GeneratedInternalTypeHelper.g.cs
+﻿
 FD:\Study\Company_Study\C_Sharp_Company_Study\wpf\MyToDo\MyToDo\App.xaml;;
 FD:\Study\Company_Study\C_Sharp_Company_Study\wpf\MyToDo\MyToDo\Views\AboutView.xaml;;
 FD:\Study\Company_Study\C_Sharp_Company_Study\wpf\MyToDo\MyToDo\Views\IndexView.xaml;;
@@ -7,4 +7,5 @@ FD:\Study\Company_Study\C_Sharp_Company_Study\wpf\MyToDo\MyToDo\Views\MemoView.x
 FD:\Study\Company_Study\C_Sharp_Company_Study\wpf\MyToDo\MyToDo\Views\SettingsView.xaml;;
 FD:\Study\Company_Study\C_Sharp_Company_Study\wpf\MyToDo\MyToDo\Views\SkinView.xaml;;
 FD:\Study\Company_Study\C_Sharp_Company_Study\wpf\MyToDo\MyToDo\Views\ToDoView.xaml;;
+FD:\Study\Company_Study\C_Sharp_Company_Study\wpf\MyToDo\MyToDo\Views\LoadingView.xaml;;
 
