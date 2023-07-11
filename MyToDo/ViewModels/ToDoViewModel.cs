@@ -19,9 +19,39 @@ namespace MyToDo.ViewModels
         public ToDoViewModel(IToDoService service, IContainerProvider container):base(container)
         {
             ToDoDtos = new ObservableCollection<ToDoDto>();
-            AddCommand = new DelegateCommand(Add);
+            ExcuteCommand = new DelegateCommand<String>(Excute);
+            SelectCommand = new DelegateCommand<ToDoDto>(Selected);
             this.service = service;
         }
+
+        private void Excute(string obj)
+        {
+            switch (obj)
+            {
+                case "新增":Add();break;
+                case "查询":Query();break;
+                case "保存":Save();break;
+            }
+        }
+
+        
+
+        private void Query()
+        {
+            GetDataListAsync();
+        }
+
+        private string search;
+
+        /// <summary>
+        /// 搜索条件
+        /// </summary>
+        public string Search
+        {
+            get { return search; }
+            set { search = value;RaisePropertyChanged(); }
+        }
+
 
         private bool isRightDrawerOpen;
 
@@ -34,15 +64,95 @@ namespace MyToDo.ViewModels
             set { isRightDrawerOpen = value; RaisePropertyChanged(); }
         }
 
+        private ToDoDto currentDto;
+
+        /// <summary>
+        /// 编辑选中/新增时的对象
+        /// </summary>
+        public ToDoDto CurrentDto
+        {
+            get { return currentDto; }
+            set { currentDto = value;RaisePropertyChanged(); }
+        }
+
+
         /// <summary>
         /// 添加待办
         /// </summary>
         private void Add()
         {
+            CurrentDto = new ToDoDto();
             IsRightDrawerOpen = true;
         }
 
-        public DelegateCommand AddCommand { get;private set; }
+        private async void Selected(ToDoDto obj)
+        {
+            try
+            {
+                UpdateLoading(true);
+                var result=await service.GetFirstorDefaultAsync(obj.Id);
+                if (result.Status)
+                {
+                    IsRightDrawerOpen = true;
+                    CurrentDto = result.Result;
+                }
+                
+            }
+            catch(Exception ex)
+            {
+
+            }
+            finally
+            {
+                UpdateLoading(false);
+            }
+        }
+
+        private async void Save()
+        {
+            try
+            {
+                if(string.IsNullOrWhiteSpace(currentDto.Title) || string.IsNullOrWhiteSpace(currentDto.Content))
+                {
+                    return;
+                }
+                UpdateLoading(true);
+                if (currentDto.Id > 0)
+                {
+                    var updateresult=await service.UpdateAsync(currentDto);
+                    if (updateresult.Status)
+                    {
+                        var todo = ToDoDtos.FirstOrDefault(x => x.Id == currentDto.Id);
+                        if (todo != null)
+                        {
+                            todo.Title = currentDto.Title;
+                            todo.Content = currentDto.Content;
+                            todo.Status = currentDto.Status;
+                            IsRightDrawerOpen = false;
+                        }
+                    }
+                }
+                else
+                {
+                    var addresult = await service.AddAsync(currentDto);
+                    if (addresult.Status)
+                    {
+                        toDoDtos.Add(addresult.Result);
+                        IsRightDrawerOpen = false;
+                    }
+                }
+            }
+            catch(Exception ex)
+            {
+            }
+            finally
+            {
+                UpdateLoading(false);
+            }
+        }
+
+        public DelegateCommand<string> ExcuteCommand { get;private set; }
+        public DelegateCommand<ToDoDto> SelectCommand { get; private set; }
 
         private ObservableCollection<ToDoDto> toDoDtos;
         private readonly IToDoService service;
@@ -64,6 +174,7 @@ namespace MyToDo.ViewModels
             {
                 PageIndex = 0,
                 PageSize=100,
+                Search= Search,
             });
             if (todoresult.Status)
             {

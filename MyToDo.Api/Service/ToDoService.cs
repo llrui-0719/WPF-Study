@@ -66,7 +66,7 @@ namespace MyToDo.Api.Service
             try
             {
                 var repository = work.GetRepository<ToDo>();
-                var todos = await repository.GetPagedListAsync(predicate: x => string.IsNullOrEmpty(parameter.Search) ? true : x.Title.Equals(parameter.Search),
+                var todos = await repository.GetPagedListAsync(predicate: x => string.IsNullOrEmpty(parameter.Search) ? true : x.Title.Contains(parameter.Search),
                     pageIndex: parameter.PageIndex,
                     pageSize: parameter.PageSize,
                     orderBy: source => source.OrderByDescending(t => t.CreateDate));
