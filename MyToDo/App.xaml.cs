@@ -32,6 +32,7 @@ namespace MyToDo
             containerRegistry.GetContainer().RegisterInstance(@"http://localhost:5000/", serviceKey: "webUrl");
 
             containerRegistry.Register<IToDoService, ToDoService>();
+            containerRegistry.Register<IMemoService, MemoService>();
 
             containerRegistry.RegisterForNavigation<MainView, MainViewModel>();
             containerRegistry.RegisterForNavigation<IndexView, IndexViewModel>();

@@ -1,4 +1,5 @@
 ﻿using MyToDo.Common.Models;
+using MyToDo.Shared.Dtos;
 using Prism.Mvvm;
 using System;
 using System.Collections.Generic;
@@ -57,7 +58,7 @@ namespace MyToDo.ViewModels
             for(var i = 1; i < 10; i++)
             {
                 toDoDtos.Add(new ToDoDto() { Title = "待办标题："+i, Content = "待办内容：" + i, Status = i });
-                memoDtos.Add(new MemoDto() { Title = "备忘录标题："+i, Content = "备忘录内容："+i, Status = i });
+                memoDtos.Add(new MemoDto() { Title = "备忘录标题："+i, Content = "备忘录内容："+i });
             }
         }
 

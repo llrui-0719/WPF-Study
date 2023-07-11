@@ -9,4 +9,3 @@ D:\Study\Company_Study\C_Sharp_Company_Study\wpf\MyToDo\MyToDo.Shared\obj\Debug\
 D:\Study\Company_Study\C_Sharp_Company_Study\wpf\MyToDo\MyToDo.Shared\obj\Debug\net5.0\MyToDo.Shared.dll
 D:\Study\Company_Study\C_Sharp_Company_Study\wpf\MyToDo\MyToDo.Shared\obj\Debug\net5.0\ref\MyToDo.Shared.dll
 D:\Study\Company_Study\C_Sharp_Company_Study\wpf\MyToDo\MyToDo.Shared\obj\Debug\net5.0\MyToDo.Shared.pdb
-D:\Study\Company_Study\C_Sharp_Company_Study\wpf\MyToDo\MyToDo.Shared\obj\Debug\net5.0\MyToDo.Shared.csproj.AssemblyReference.cache
