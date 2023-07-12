@@ -1,6 +1,7 @@
 ﻿using MyToDo.Common.Models;
 using MyToDo.Service;
 using MyToDo.Shared.Dtos;
+using MyToDo.Shared.Parameter;
 using Prism.Commands;
 using Prism.Ioc;
 using Prism.Mvvm;
@@ -21,7 +22,21 @@ namespace MyToDo.ViewModels
             ToDoDtos = new ObservableCollection<ToDoDto>();
             ExcuteCommand = new DelegateCommand<String>(Excute);
             SelectCommand = new DelegateCommand<ToDoDto>(Selected);
+            DeleteCommand = new DelegateCommand<ToDoDto>(Delete);
             this.service = service;
+        }
+
+        private async void Delete(ToDoDto obj)
+        {
+            var result= await service.DeleteAsync(obj.Id);
+            if (result.Status)
+            {
+                var model=ToDoDtos.FirstOrDefault(x => x.Id == obj.Id);
+                if (model != null)
+                {
+                    ToDoDtos.Remove(model);
+                }
+            }
         }
 
         private void Excute(string obj)
@@ -40,6 +55,18 @@ namespace MyToDo.ViewModels
         {
             GetDataListAsync();
         }
+
+        private int selectIndex;
+
+        /// <summary>
+        /// 搜索框，下拉列表选中状态值
+        /// </summary>
+        public int SelectIndex
+        {
+            get { return selectIndex; }
+            set { selectIndex = value; RaisePropertyChanged(); }
+        }
+
 
         private string search;
 
@@ -153,6 +180,7 @@ namespace MyToDo.ViewModels
 
         public DelegateCommand<string> ExcuteCommand { get;private set; }
         public DelegateCommand<ToDoDto> SelectCommand { get; private set; }
+        public DelegateCommand<ToDoDto> DeleteCommand { get; private set; }
 
         private ObservableCollection<ToDoDto> toDoDtos;
         private readonly IToDoService service;
@@ -170,12 +198,15 @@ namespace MyToDo.ViewModels
         {
             UpdateLoading(true);
 
-            var todoresult=await service.GetAllAsync(new Shared.Parameter.QueryParameter()
+            int? status =SelectIndex == 0 ? null : SelectIndex == 2 ? 1 : 0;
+
+            var todoresult = await service.GetAllFilterAsync(new ToDoParameter()
             {
                 PageIndex = 0,
-                PageSize=100,
-                Search= Search,
-            });
+                PageSize = 100,
+                Search = Search,
+                Status = status,
+            }); 
             if (todoresult.Status)
             {
                 ToDoDtos.Clear();

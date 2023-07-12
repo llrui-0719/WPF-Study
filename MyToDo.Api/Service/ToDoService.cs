@@ -32,7 +32,7 @@ namespace MyToDo.Api.Service
                 await work.GetRepository<ToDo>().InsertAsync(todo);
                 if(await work.SaveChangesAsync()>0)
                 {
-                    return new ApiResponse(true, model);
+                    return new ApiResponse(true, todo);
                 }
                 return new ApiResponse(false, "添加数据失败");
             }
@@ -67,6 +67,24 @@ namespace MyToDo.Api.Service
             {
                 var repository = work.GetRepository<ToDo>();
                 var todos = await repository.GetPagedListAsync(predicate: x => string.IsNullOrEmpty(parameter.Search) ? true : x.Title.Contains(parameter.Search),
+                    pageIndex: parameter.PageIndex,
+                    pageSize: parameter.PageSize,
+                    orderBy: source => source.OrderByDescending(t => t.CreateDate));
+                return new ApiResponse(true, todos);
+            }
+            catch (Exception ex)
+            {
+                return new ApiResponse(false, ex.Message);
+            }
+        }
+
+        public async Task<ApiResponse> GetAllAsync(ToDoParameter parameter)
+        {
+            try
+            {
+                var repository = work.GetRepository<ToDo>();
+                var todos = await repository.GetPagedListAsync(predicate: x => (string.IsNullOrEmpty(parameter.Search) ? true : x.Title.Contains(parameter.Search))
+                && (parameter.Status==null ? true:(x.Status==parameter.Status)),
                     pageIndex: parameter.PageIndex,
                     pageSize: parameter.PageSize,
                     orderBy: source => source.OrderByDescending(t => t.CreateDate));
