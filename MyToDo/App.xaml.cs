@@ -1,4 +1,5 @@
 ﻿using DryIoc;
+using MyToDo.Common;
 using MyToDo.Service;
 using MyToDo.view;
 using MyToDo.ViewModels;
@@ -23,6 +24,15 @@ namespace MyToDo
         protected override Window CreateShell()
         {
             return Container.Resolve<MainView>();
+        }
+
+        protected override void OnInitialized()
+        {
+            var service= App.Current.MainWindow.DataContext as IConfigureService;
+            if (service != null) {
+                service.Configure();
+            }
+            base.OnInitialized();
         }
 
 
