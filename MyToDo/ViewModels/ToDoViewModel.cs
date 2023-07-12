@@ -28,15 +28,28 @@ namespace MyToDo.ViewModels
 
         private async void Delete(ToDoDto obj)
         {
-            var result= await service.DeleteAsync(obj.Id);
-            if (result.Status)
+            try
             {
-                var model=ToDoDtos.FirstOrDefault(x => x.Id == obj.Id);
-                if (model != null)
+                UpdateLoading(true);
+                var result = await service.DeleteAsync(obj.Id);
+                if (result.Status)
                 {
-                    ToDoDtos.Remove(model);
+                    var model = ToDoDtos.FirstOrDefault(x => x.Id == obj.Id);
+                    if (model != null)
+                    {
+                        ToDoDtos.Remove(model);
+                    }
                 }
             }
+            catch(Exception ex)
+            {
+
+            }
+            finally
+            {
+                UpdateLoading(false);
+            }
+            
         }
 
         private void Excute(string obj)
@@ -164,7 +177,7 @@ namespace MyToDo.ViewModels
                     var addresult = await service.AddAsync(currentDto);
                     if (addresult.Status)
                     {
-                        toDoDtos.Add(addresult.Result);
+                        ToDoDtos.Add(addresult.Result);
                         IsRightDrawerOpen = false;
                     }
                 }
