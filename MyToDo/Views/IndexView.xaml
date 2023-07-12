@@ -116,6 +116,8 @@
                         Width="30"
                         Height="30"
                         VerticalAlignment="Top"
+                        Command="{Binding ExcuteCommand}"
+                        CommandParameter="新增待办"
                         Content="+"
                         DockPanel.Dock="Right"
                         Style="{StaticResource MaterialDesignFloatingActionButton}" />
@@ -163,6 +165,8 @@
                         Width="30"
                         Height="30"
                         VerticalAlignment="Top"
+                        Command="{Binding ExcuteCommand}"
+                        CommandParameter="新增备忘录"
                         Content="+"
                         DockPanel.Dock="Right"
                         Style="{StaticResource MaterialDesignFloatingActionButton}" />

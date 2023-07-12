@@ -1,6 +1,8 @@
 ﻿using MyToDo.Common.Models;
 using MyToDo.Shared.Dtos;
+using Prism.Commands;
 using Prism.Mvvm;
+using Prism.Services.Dialogs;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -12,13 +14,36 @@ namespace MyToDo.ViewModels
 {
     public class IndexViewModel:BindableBase
     {
-        public IndexViewModel()
+        public IndexViewModel(IDialogService dialog)
         {
             TaskBars = new ObservableCollection<TaskBar>();
             CreateTaskBars();
-            CreateTestData();
+            ToDoDtos = new ObservableCollection<ToDoDto>();
+            MemoDtos = new ObservableCollection<MemoDto>();
+            ExcuteCommand = new DelegateCommand<string>(Excute);
+            this.dialog = dialog;
         }
 
+        private void Excute(string obj)
+        {
+            switch (obj)
+            {
+                case "新增待办":AddTodo();break;
+                case "新增备忘录":AddMemo();break;
+            }
+        }
+        private void AddTodo()
+        {
+            dialog.ShowDialog("AddToDoView");
+        }
+
+        private void AddMemo()
+        {
+            dialog.ShowDialog("AddMemoView");
+        }
+
+
+        #region 属性
         private ObservableCollection<TaskBar> taskBars;
 
         public ObservableCollection<TaskBar> TaskBars
@@ -36,12 +61,15 @@ namespace MyToDo.ViewModels
         }
 
         private ObservableCollection<MemoDto> memoDtos;
+        private readonly IDialogService dialog;
 
         public ObservableCollection<MemoDto> MemoDtos
         {
             get { return memoDtos; }
             set { memoDtos = value; RaisePropertyChanged(); }
         }
+        #endregion
+        public DelegateCommand<string> ExcuteCommand { get; private set; }
 
         void CreateTaskBars()
         {
@@ -49,17 +77,6 @@ namespace MyToDo.ViewModels
             TaskBars.Add(new TaskBar() {Icon="ClockCheckOutline",Title="已完成",Content="9",Color="#FF1ECA3A",Target="" });
             TaskBars.Add(new TaskBar() {Icon="ChartLineVariant",Title="完成比例",Content="100",Color="#FF02C6DC",Target="" });
             TaskBars.Add(new TaskBar() {Icon="PlaylistStar",Title="备忘录",Content="4",Color="#FFFFA000",Target="" });
-        }
-
-        void CreateTestData()
-        {
-            toDoDtos = new ObservableCollection<ToDoDto>();
-            memoDtos = new ObservableCollection<MemoDto>();
-            for(var i = 1; i < 10; i++)
-            {
-                toDoDtos.Add(new ToDoDto() { Title = "待办标题："+i, Content = "待办内容：" + i, Status = i });
-                memoDtos.Add(new MemoDto() { Title = "备忘录标题："+i, Content = "备忘录内容："+i });
-            }
         }
 
     }
