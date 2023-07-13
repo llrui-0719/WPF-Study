@@ -55,17 +55,26 @@ namespace MyToDo.ViewModels
 
         private async void Complted(ToDoDto obj)
         {
-            var result =await todoService.UpdateAsync(obj);
-            if (result.Status)
+            try
             {
-                var todo = summary.ToDoList.FirstOrDefault(x => x.Id == obj.Id);
-                if (todo != null)
+                UpdateLoading(true);
+                var result = await todoService.UpdateAsync(obj);
+                if (result.Status)
                 {
-                    summary.ToDoList.Remove(todo);
-                    summary.CompletedCount += 1;
-                    summary.CompletedRadio = (summary.CompletedCount / (double)summary.Sum).ToString("0%");
-                    this.Refresh();
+                    var todo = summary.ToDoList.FirstOrDefault(x => x.Id == obj.Id);
+                    if (todo != null)
+                    {
+                        summary.ToDoList.Remove(todo);
+                        summary.CompletedCount += 1;
+                        summary.CompletedRadio = (summary.CompletedCount / (double)summary.Sum).ToString("0%");
+                        this.Refresh();
+                    }
+                    aggregator.SendMessage($"待办{obj.Title}，已完成");
                 }
+            }
+            finally
+            {
+                UpdateLoading(false);
             }
         }
 
@@ -91,28 +100,36 @@ namespace MyToDo.ViewModels
             var result=await dialog.ShowDialog("AddToDoView", param);
             if (result.Result == ButtonResult.OK)
             {
-                var todo= result.Parameters.GetValue<ToDoDto>("Value");
-                if (todo.Id > 0)//更新
+                try
                 {
-                    var updateresult = await todoService.UpdateAsync(todo);
-                    if (updateresult.Status)
+                    UpdateLoading(true);
+                    var todo = result.Parameters.GetValue<ToDoDto>("Value");
+                    if (todo.Id > 0)//更新
                     {
-                        var Info = summary.ToDoList.FirstOrDefault(x => x.Id == todo.Id);
-                        Info.Title = todo.Title;
-                        Info.Content = todo.Content;
+                        var updateresult = await todoService.UpdateAsync(todo);
+                        if (updateresult.Status)
+                        {
+                            var Info = summary.ToDoList.FirstOrDefault(x => x.Id == todo.Id);
+                            Info.Title = todo.Title;
+                            Info.Content = todo.Content;
+                            aggregator.SendMessage($"待办{Info.Title},更新成功");
+                        }
+                    }
+                    else//新增
+                    {
+                        var addresult = await todoService.AddAsync(todo);
+                        if (addresult.Status)
+                        {
+                            summary.ToDoList.Add(addresult.Result);
+                            summary.Sum += 1;
+                            summary.CompletedRadio = (summary.CompletedCount / (double)summary.Sum).ToString("0%");
+                            this.Refresh();
+                        }
                     }
                 }
-                else//新增
+                finally
                 {
-                    var addresult=await todoService.AddAsync(todo);
-                    if (addresult.Status)
-                    {
-                        summary.ToDoList.Add(addresult.Result);
-                        summary.Sum += 1;
-                        summary.CompletedRadio = (summary.CompletedCount / (double)summary.Sum).ToString("0%");
-                        this.Refresh();
-
-                    }
+                    UpdateLoading(false);
                 }
             }
         }
@@ -130,30 +147,38 @@ namespace MyToDo.ViewModels
             var result = await dialog.ShowDialog("AddMemoView", param);
             if (result.Result == ButtonResult.OK)
             {
-                var memo = result.Parameters.GetValue<MemoDto>("Value");
-                if (memo.Id > 0)
+                try
                 {
-                    var updateresult = await memoService.UpdateAsync(memo);
-                    if (updateresult.Status)
+                    UpdateLoading(true);
+                    var memo = result.Parameters.GetValue<MemoDto>("Value");
+                    if (memo.Id > 0)
                     {
-                        var Info = summary.MemoList.FirstOrDefault(x => x.Id == memo.Id);
-                        Info.Title = memo.Title;
-                        Info.Content = memo.Content;
+                        var updateresult = await memoService.UpdateAsync(memo);
+                        if (updateresult.Status)
+                        {
+                            var Info = summary.MemoList.FirstOrDefault(x => x.Id == memo.Id);
+                            Info.Title = memo.Title;
+                            Info.Content = memo.Content;
+                            aggregator.SendMessage($"备忘录{Info.Title},更新成功");
+                        }
+                    }
+                    else
+                    {
+                        var addresult = await memoService.AddAsync(memo);
+                        if (addresult.Status)
+                        {
+                            summary.MemoList.Add(addresult.Result);
+                            summary.MemoCount += 1;
+                            this.Refresh();
+                        }
                     }
                 }
-                else
+                finally
                 {
-                    var addresult = await memoService.AddAsync(memo);
-                    if (addresult.Status)
-                    {
-                        summary.MemoList.Add(addresult.Result);
-                        summary.MemoCount += 1;
-                        this.Refresh();
-                    }
+                    UpdateLoading(false);
                 }
             }
         }
-
 
         #region 属性
         private ObservableCollection<TaskBar> taskBars;

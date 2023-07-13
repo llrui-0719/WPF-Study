@@ -30,6 +30,11 @@ namespace MyToDo.view
         {
             InitializeComponent();
 
+            //注册提示消息
+            aggregator.ResgiterMsg(arg => {
+                Snackbar.MessageQueue.Enqueue(arg);
+            });
+
             //注册等待消息窗口
             aggregator.Resgiter(arg => {
                 DialogHost.IsOpen = arg.IsOpen;
