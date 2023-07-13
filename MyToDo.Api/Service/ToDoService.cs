@@ -6,6 +6,7 @@ using MyToDo.Shared.Dtos;
 using MyToDo.Shared.Parameter;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -107,6 +108,33 @@ namespace MyToDo.Api.Service
             catch (Exception ex)
             {
                 return new ApiResponse(false, ex.Message);
+            }
+        }
+
+        public async Task<ApiResponse> Summary()
+        {
+            try
+            {
+                //待办事项结果
+                var todos = await work.GetRepository<ToDo>().GetAllAsync(orderBy:source=>source.OrderByDescending(t=>t.CreateDate));
+
+                //备忘录结果
+                var memos = await work.GetRepository<Memo>().GetAllAsync(orderBy: source => source.OrderByDescending(t => t.CreateDate));
+
+                SummaryDto summaryDto = new SummaryDto();
+                summaryDto.ToDoList = new ObservableCollection<ToDoDto>(mapper.Map<List<ToDoDto>>(todos.Where(t=>t.Status==0)));
+                summaryDto.MemoList = new ObservableCollection<MemoDto>(mapper.Map<List<MemoDto>>(memos));
+                summaryDto.Sum = todos.Count();//汇总
+                summaryDto.CompletedCount = todos.Where(x => x.Status == 1).Count();//完成
+                summaryDto.CompletedRadio = (summaryDto.CompletedCount / (double)summaryDto.Sum).ToString("0%");//完成比例
+                summaryDto.MemoCount = memos.Count();//备忘录数量
+
+                return new ApiResponse(true, summaryDto);
+
+            }
+            catch(Exception ex)
+            {
+                return new ApiResponse(false, "");
             }
         }
 
