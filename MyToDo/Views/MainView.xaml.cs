@@ -1,4 +1,5 @@
-﻿using MyToDo.Extensions;
+﻿using MyToDo.Common;
+using MyToDo.Extensions;
 using MyToDo.ViewModels;
 using MyToDo.Views;
 using Prism.Events;
@@ -23,7 +24,9 @@ namespace MyToDo.view
     /// </summary>
     public partial class MainView : Window
     {
-        public MainView(IEventAggregator aggregator)
+        private readonly IDialogHostService dialogHostService;
+
+        public MainView(IEventAggregator aggregator,IDialogHostService dialogHostService)
         {
             InitializeComponent();
 
@@ -46,6 +49,8 @@ namespace MyToDo.view
             };
             btnClose.Click += async (s, e) =>
             {
+                var result=await dialogHostService.Question("提示","确认退出系统？");
+                if (result.Result != Prism.Services.Dialogs.ButtonResult.OK) return;
                 this.Close();
             };
             ColorZone.MouseMove += (s, e) =>
@@ -65,6 +70,7 @@ namespace MyToDo.view
             menubar.SelectionChanged += (s, e) => {
                 drawerHost.IsLeftDrawerOpen = false;
             };
+            this.dialogHostService = dialogHostService;
         }
     }
 }

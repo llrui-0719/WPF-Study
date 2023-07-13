@@ -1,4 +1,6 @@
-﻿using MyToDo.Common.Models;
+﻿using MyToDo.Common;
+using MyToDo.Common.Models;
+using MyToDo.Extensions;
 using MyToDo.Service;
 using MyToDo.Shared.Dtos;
 using MyToDo.Shared.Parameter;
@@ -6,6 +8,7 @@ using Prism.Commands;
 using Prism.Ioc;
 using Prism.Mvvm;
 using Prism.Regions;
+using Prism.Services.Dialogs;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -17,12 +20,15 @@ namespace MyToDo.ViewModels
 {
     public class ToDoViewModel: NavigationViewModel
     {
+        private static IDialogHostService dialogHost;
+
         public ToDoViewModel(IToDoService service, IContainerProvider container):base(container)
         {
             ToDoDtos = new ObservableCollection<ToDoDto>();
             ExcuteCommand = new DelegateCommand<String>(Excute);
             SelectCommand = new DelegateCommand<ToDoDto>(Selected);
             DeleteCommand = new DelegateCommand<ToDoDto>(Delete);
+            dialogHost = container.Resolve<IDialogHostService>();
             this.service = service;
         }
 
@@ -30,6 +36,9 @@ namespace MyToDo.ViewModels
         {
             try
             {
+                var dialogResult=await dialogHost.Question("温馨提示",$"确认删除待办事项：{obj.Title}?");
+                if (dialogResult.Result != ButtonResult.OK) return;
+
                 UpdateLoading(true);
                 var result = await service.DeleteAsync(obj.Id);
                 if (result.Status)

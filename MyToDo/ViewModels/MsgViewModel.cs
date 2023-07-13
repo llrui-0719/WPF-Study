@@ -1,6 +1,7 @@
 ﻿using MaterialDesignThemes.Wpf;
 using MyToDo.Common;
 using Prism.Commands;
+using Prism.Mvvm;
 using Prism.Services.Dialogs;
 using System;
 using System.Collections.Generic;
@@ -8,15 +9,32 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace MyToDo.ViewModels.Dialogs
+namespace MyToDo.ViewModels
 {
-    public class AddToDoViewModel : IDialogHostAware
+    public class MsgViewModel:BindableBase, IDialogHostAware
     {
-        public AddToDoViewModel()
+        public MsgViewModel()
         {
             SaveCommand = new DelegateCommand(Save);
             CancelCommand = new DelegateCommand(Cancel);
         }
+
+        #region 属性
+        private string title;
+
+        public string Title
+        {
+            get { return title; }
+            set { title = value; RaisePropertyChanged(); }
+        }
+        private string content;
+
+        public string Content
+        {
+            get { return content; }
+            set { content = value;RaisePropertyChanged(); }
+        }
+        #endregion
 
         private void Cancel()
         {
@@ -35,13 +53,20 @@ namespace MyToDo.ViewModels.Dialogs
             }
         }
 
-        public string DialogHostName { get; set; }
+        public string DialogHostName { get; set; } = "Root";
         public DelegateCommand SaveCommand { get; set; }
         public DelegateCommand CancelCommand { get; set; }
 
         public void OnDialogOpend(IDialogParameters parameters)
         {
-
+            if (parameters.ContainsKey("Title"))
+            {
+                Title = parameters.GetValue<string>("Title");
+            }
+            if (parameters.ContainsKey("Content"))
+            {
+                Content = parameters.GetValue<string>("Content");
+            }
         }
     }
 }

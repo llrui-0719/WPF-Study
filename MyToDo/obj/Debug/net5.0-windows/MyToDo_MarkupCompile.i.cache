@@ -10,11 +10,11 @@ none
 false
 TRACE;DEBUG;NET;NET5_0;NETCOREAPP
 D:\Study\Company_Study\C_Sharp_Company_Study\wpf\MyToDo\MyToDo\App.xaml
-10-479755980
+11617115301
 
-431988445282
+45-666879594
 223179627077
-Views\AboutView.xaml;Views\Dialogs\AddMemoView.xaml;Views\Dialogs\AddToDoView.xaml;Views\IndexView.xaml;Views\LoadingView.xaml;Views\MainView.xaml;Views\MemoView.xaml;Views\SettingsView.xaml;Views\SkinView.xaml;Views\ToDoView.xaml;
+Views\AboutView.xaml;Views\Dialogs\AddMemoView.xaml;Views\Dialogs\AddToDoView.xaml;Views\IndexView.xaml;Views\LoadingView.xaml;Views\MainView.xaml;Views\MemoView.xaml;Views\MsgView.xaml;Views\SettingsView.xaml;Views\SkinView.xaml;Views\ToDoView.xaml;
 
 False
 
