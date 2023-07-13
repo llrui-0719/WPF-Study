@@ -28,7 +28,10 @@
                 DockPanel.Dock="Top"
                 Orientation="Horizontal">
                 <TextBlock VerticalAlignment="Center" Text="状态：" />
-                <ComboBox Margin="10,0" SelectedIndex="{Binding Model.Status}">
+                <ComboBox
+                    Margin="10,0"
+                    IsReadOnly="{Binding IsReadOnly}"
+                    SelectedIndex="{Binding Model.Status}">
                     <ComboBoxItem>待办</ComboBoxItem>
                     <ComboBoxItem>已完成</ComboBoxItem>
                 </ComboBox>

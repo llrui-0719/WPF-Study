@@ -21,6 +21,15 @@ namespace MyToDo.ViewModels.Dialogs
             CancelCommand = new DelegateCommand(Cancel);
         }
 
+        private bool isReadOnly;
+
+        public bool IsReadOnly
+        {
+            get { return isReadOnly; }
+            set { isReadOnly = value;RaisePropertyChanged(); }
+        }
+
+
         private ToDoDto model;
         /// <summary>
         /// 新增或编辑的实体
@@ -66,10 +75,12 @@ namespace MyToDo.ViewModels.Dialogs
             if (parameters.ContainsKey("Value"))
             {
                 Model = parameters.GetValue<ToDoDto>("Value");
+                IsReadOnly = true;
             }
             else
             {
                 Model = new ToDoDto();
+                IsReadOnly = false;
             }
         }
     }
