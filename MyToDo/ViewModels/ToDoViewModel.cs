@@ -243,6 +243,15 @@ namespace MyToDo.ViewModels
         public override void OnNavigatedTo(NavigationContext navigationContext)
         {
             base.OnNavigatedTo(navigationContext);
+            if (navigationContext.Parameters.ContainsKey("Value"))
+            {
+                SelectIndex=navigationContext.Parameters.GetValue<int>("Value");
+            }
+            else
+            {
+                SelectIndex = 0;
+            }
+
             GetDataListAsync();
         }
     }

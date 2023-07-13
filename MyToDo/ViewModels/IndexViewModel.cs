@@ -1,5 +1,6 @@
 ﻿using MyToDo.Common;
 using MyToDo.Common.Models;
+using MyToDo.Extensions;
 using MyToDo.Service;
 using MyToDo.Shared.Dtos;
 using MyToDo.Shared.Parameter;
@@ -21,17 +22,35 @@ namespace MyToDo.ViewModels
     {
         private readonly IToDoService todoService;
         private readonly IMemoService memoService;
+        private readonly IDialogHostService dialog;
+        private readonly IRegionManager regionManager;
 
         public IndexViewModel(IContainerProvider provider,IDialogHostService dialog):base(provider)
         {
+            Title = $"{DateTime.Now.GetDateTimeFormats('D')[1].ToString()},你好大混子";
             ExcuteCommand = new DelegateCommand<string>(Excute);
             EditMemoCommand = new DelegateCommand<MemoDto>(AddMemo);
             EditToDoCommand = new DelegateCommand<ToDoDto>(AddToDo);
             ToDoCompltedCommand = new DelegateCommand<ToDoDto>(Complted);
+            NavigateCommand = new DelegateCommand<TaskBar>(Navigate);
+            this.regionManager = provider.Resolve<IRegionManager>();
             this.todoService = provider.Resolve<IToDoService>();
             this.memoService = provider.Resolve<IMemoService>();
             this.dialog = dialog;
             CreateTaskBars();
+        }
+
+        private void Navigate(TaskBar obj)
+        {
+            if (string.IsNullOrWhiteSpace(obj.Target)) return;
+
+            NavigationParameters param = new NavigationParameters();
+            if (obj.Title.Equals("已完成"))
+            {
+                param.Add("Value",2);
+            }
+
+            regionManager.Regions[PrismManager.MainViewRegionName].RequestNavigate(obj.Target,param);
         }
 
         private async void Complted(ToDoDto obj)
@@ -43,6 +62,9 @@ namespace MyToDo.ViewModels
                 if (todo != null)
                 {
                     summary.ToDoList.Remove(todo);
+                    summary.CompletedCount += 1;
+                    summary.CompletedRadio = (summary.CompletedCount / (double)summary.Sum).ToString("0%");
+                    this.Refresh();
                 }
             }
         }
@@ -86,6 +108,10 @@ namespace MyToDo.ViewModels
                     if (addresult.Status)
                     {
                         summary.ToDoList.Add(addresult.Result);
+                        summary.Sum += 1;
+                        summary.CompletedRadio = (summary.CompletedCount / (double)summary.Sum).ToString("0%");
+                        this.Refresh();
+
                     }
                 }
             }
@@ -121,6 +147,8 @@ namespace MyToDo.ViewModels
                     if (addresult.Status)
                     {
                         summary.MemoList.Add(addresult.Result);
+                        summary.MemoCount += 1;
+                        this.Refresh();
                     }
                 }
             }
@@ -136,7 +164,17 @@ namespace MyToDo.ViewModels
             set { taskBars = value; RaisePropertyChanged(); }
         }
 
-        private readonly IDialogHostService dialog;
+        private string title;
+        /// <summary>
+        /// 标题
+        /// </summary>
+        public string Title
+        {
+            get { return title; }
+            set { title = value;RaisePropertyChanged(); }
+        }
+
+
 
         /// <summary>
         /// 首页统计
@@ -156,13 +194,15 @@ namespace MyToDo.ViewModels
         public DelegateCommand<MemoDto> EditMemoCommand { get; private set; }
         public DelegateCommand<string> ExcuteCommand { get; private set; }
 
+        public DelegateCommand<TaskBar> NavigateCommand { get; private set; }
+
         void CreateTaskBars()
         {
             TaskBars = new ObservableCollection<TaskBar>();
-            TaskBars.Add(new TaskBar() {Icon="ClockFast",Title="汇总",Color="#FF0CA0FF",Target="" });
-            TaskBars.Add(new TaskBar() {Icon="ClockCheckOutline",Title="已完成",Color="#FF1ECA3A",Target="" });
+            TaskBars.Add(new TaskBar() {Icon="ClockFast",Title="汇总",Color="#FF0CA0FF",Target="ToDoView" });
+            TaskBars.Add(new TaskBar() {Icon="ClockCheckOutline",Title="已完成",Color="#FF1ECA3A",Target= "ToDoView" });
             TaskBars.Add(new TaskBar() {Icon="ChartLineVariant",Title="完成比例", Color="#FF02C6DC",Target="" });
-            TaskBars.Add(new TaskBar() {Icon="PlaylistStar",Title="备忘录", Color="#FFFFA000",Target="" });
+            TaskBars.Add(new TaskBar() {Icon="PlaylistStar",Title="备忘录", Color="#FFFFA000",Target="MemoView" });
         }
 
         public override async void OnNavigatedTo(NavigationContext navigationContext)

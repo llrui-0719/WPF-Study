@@ -24,7 +24,7 @@
         <TextBlock
             Margin="15,10"
             FontSize="22"
-            Text="你好，划水怪，今天又在划水" />
+            Text="{Binding Title}" />
         <ItemsControl Grid.Row="1" ItemsSource="{Binding TaskBars}">
             <ItemsControl.ItemsPanel>
                 <ItemsPanelTemplate>
@@ -38,6 +38,12 @@
                         Margin="10"
                         Background="{Binding Color}"
                         CornerRadius="5">
+                        <Border.InputBindings>
+                            <MouseBinding
+                                Command="{Binding DataContext.NavigateCommand, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=ItemsControl}}"
+                                CommandParameter="{Binding}"
+                                MouseAction="LeftClick" />
+                        </Border.InputBindings>
                         <Border.Style>
                             <Style TargetType="Border">
                                 <Style.Triggers>
