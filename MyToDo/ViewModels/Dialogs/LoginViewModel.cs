@@ -1,6 +1,8 @@
-﻿using MyToDo.Service;
+﻿using MyToDo.Extensions;
+using MyToDo.Service;
 using MyToDo.Shared.Dtos;
 using Prism.Commands;
+using Prism.Events;
 using Prism.Mvvm;
 using Prism.Services.Dialogs;
 using System;
@@ -15,11 +17,14 @@ namespace MyToDo.ViewModels.Dialogs
     {
 
         private readonly ILoginService service;
-        public LoginViewModel(ILoginService service)
+
+        private readonly IEventAggregator aggregator;
+        public LoginViewModel(ILoginService service, IEventAggregator aggregator)
         {
             UserDto = new RegisterDto();
             ExecuteCommand = new DelegateCommand<string>(Execute);
             this.service = service;
+            this.aggregator = aggregator;
         }
 
         private void Execute(string obj)
@@ -40,9 +45,11 @@ namespace MyToDo.ViewModels.Dialogs
             if (string.IsNullOrWhiteSpace(UserDto.Account) || string.IsNullOrWhiteSpace(UserDto.UserName) || string.IsNullOrWhiteSpace(UserDto.PassWord))
                 return;
             if (!UserDto.PassWord.Equals(UserDto.NewPassWord))
+            {
                 //验证失败提示...
+                aggregator.SendMessage("两次密码输入不一致！", "Login");
                 return;
-
+            }
             var result=await service.RegisterAsync(new Shared.Dtos.UserDto() {
                 Account= UserDto.Account,
                 UserName=UserDto.UserName,
@@ -52,9 +59,12 @@ namespace MyToDo.ViewModels.Dialogs
             if(result!=null && result.Status)
             {
                 //注册成功
+                aggregator.SendMessage("注册成功", "Login");
                 SelectedIndex = 0;
+                return;
             }
             //注册失败提示。。。
+            aggregator.SendMessage(result.Result.ToString(), "Login");
 
         }
 
@@ -78,9 +88,11 @@ namespace MyToDo.ViewModels.Dialogs
             if (loginresult.Status)
             {
                 RequestClose?.Invoke(new DialogResult(ButtonResult.OK));
+                return;
             }
 
             //登陆失败提示...
+            aggregator.SendMessage(loginresult.Result.ToString(), "Login");
 
         }
 

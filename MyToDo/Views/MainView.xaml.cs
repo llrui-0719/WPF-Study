@@ -32,8 +32,8 @@ namespace MyToDo.view
 
             //注册提示消息
             aggregator.ResgiterMsg(arg => {
-                Snackbar.MessageQueue.Enqueue(arg);
-            });
+                Snackbar.MessageQueue.Enqueue(arg.Message);
+            },"Main");
 
             //注册等待消息窗口
             aggregator.Resgiter(arg => {
