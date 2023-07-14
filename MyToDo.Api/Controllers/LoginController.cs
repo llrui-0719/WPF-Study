@@ -23,8 +23,8 @@ namespace MyToDo.Api.Controllers
             this.service = service;
         }
 
-        [HttpGet]
-        public async Task<ApiResponse> Login(string account,string password) => await service.LoginAsync(account,password);
+        [HttpPost]
+        public async Task<ApiResponse> Login([FromBody] UserDto param) => await service.LoginAsync(param.Account, param.PassWord);
 
         [HttpPost]
         public async Task<ApiResponse> Register([FromBody] UserDto user) => await service.Resgiter(user);

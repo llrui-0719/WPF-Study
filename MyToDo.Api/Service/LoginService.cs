@@ -2,6 +2,7 @@
 using MyToDo.Api.Context;
 using MyToDo.Api.Context.UnitOfWork;
 using MyToDo.Shared.Dtos;
+using MyToDo.Shared.Extensions;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -23,6 +24,8 @@ namespace MyToDo.Api.Service
         {
             try
             {
+                //加密
+                Password=Password.GetMD5();
                 var model=await work.GetRepository<User>().GetFirstOrDefaultAsync(predicate: t => 
                 t.Account.Equals(Account)
                 &&
@@ -56,6 +59,7 @@ namespace MyToDo.Api.Service
                 else
                 {
                     model.CreateDate = DateTime.Now;
+                    model.PassWord = model.PassWord.GetMD5();
                     await repository.InsertAsync(model);
                     if (await work.SaveChangesAsync() > 0)
                     {
