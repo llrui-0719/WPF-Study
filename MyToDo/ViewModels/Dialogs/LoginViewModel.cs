@@ -1,4 +1,5 @@
-﻿using Prism.Commands;
+﻿using MyToDo.Service;
+using Prism.Commands;
 using Prism.Mvvm;
 using Prism.Services.Dialogs;
 using System;
@@ -11,9 +12,12 @@ namespace MyToDo.ViewModels.Dialogs
 {
     public class LoginViewModel : BindableBase, IDialogAware
     {
-        public LoginViewModel()
+
+        private readonly ILoginService service;
+        public LoginViewModel(ILoginService service)
         {
             ExecuteCommand = new DelegateCommand<string>(Execute);
+            this.service = service;
         }
 
         private void Execute(string obj)
@@ -27,15 +31,28 @@ namespace MyToDo.ViewModels.Dialogs
 
         private void LoginOut()
         {
-            
+            RequestClose?.Invoke(new DialogResult(ButtonResult.No));
         }
 
         /// <summary>
         /// 登陆
         /// </summary>
-        private void Login()
+        private async void Login()
         {
-            
+            if (string.IsNullOrWhiteSpace(account) || string.IsNullOrWhiteSpace(passWord)) return;
+
+            var loginresult =await service.LoginAsync(new Shared.Dtos.UserDto() {
+                Account=Account,
+                PassWord=PassWord,
+            });
+
+            if (loginresult.Status)
+            {
+                RequestClose?.Invoke(new DialogResult(ButtonResult.OK));
+            }
+
+            //登陆失败提示...
+
         }
 
         public string Title { get; set; } = "ToDo";
@@ -49,6 +66,7 @@ namespace MyToDo.ViewModels.Dialogs
 
         public void OnDialogClosed()
         {
+            LoginOut();
         }
 
         public void OnDialogOpened(IDialogParameters parameters)
