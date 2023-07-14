@@ -51,7 +51,7 @@ namespace MyToDo.Extensions
             string password = PassWordExtensions.GetPassWord(passwordBox);
             if(passwordBox!=null && passwordBox.Password != password)
             {
-                PassWordExtensions.SetPassWord(passwordBox, password);
+                PassWordExtensions.SetPassWord(passwordBox, passwordBox.Password);
             }
         }
 

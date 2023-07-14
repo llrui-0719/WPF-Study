@@ -29,44 +29,106 @@
 
         <Image Margin="2" Source="/Images/login.jpeg" />
 
-        <DockPanel
-            Grid.Column="1"
-            Margin="15"
-            VerticalAlignment="Center">
-            <TextBlock
-                Margin="0,10"
-                DockPanel.Dock="Top"
-                FontSize="22"
-                FontWeight="Bold"
-                Text="欢迎使用" />
+        <md:Transitioner Grid.Column="1" SelectedIndex="{Binding SelectedIndex}">
+            <md:TransitionerSlide>
+                <DockPanel
+                    Grid.Column="1"
+                    Margin="15"
+                    VerticalAlignment="Center">
+                    <TextBlock
+                        Margin="0,10"
+                        DockPanel.Dock="Top"
+                        FontSize="22"
+                        FontWeight="Bold"
+                        Text="欢迎使用" />
 
-            <TextBox
-                Margin="0,10"
-                md:HintAssist.Hint="请输入账号"
-                DockPanel.Dock="Top"
-                Text="{Binding Account}" />
-            <PasswordBox
-                Margin="0,10"
-                md:HintAssist.Hint="请输入密码"
-                pass:PassWordExtensions.PassWord="{Binding PassWord}"
-                DockPanel.Dock="Top">
-                <i:Interaction.Behaviors>
-                    <pass:PassWordBehavior />
-                </i:Interaction.Behaviors>
-            </PasswordBox>
+                    <TextBox
+                        Margin="0,10"
+                        md:HintAssist.Hint="请输入账号"
+                        DockPanel.Dock="Top"
+                        Text="{Binding Account}" />
+                    <PasswordBox
+                        Margin="0,10"
+                        md:HintAssist.Hint="请输入密码"
+                        pass:PassWordExtensions.PassWord="{Binding PassWord, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                        DockPanel.Dock="Top">
+                        <i:Interaction.Behaviors>
+                            <pass:PassWordBehavior />
+                        </i:Interaction.Behaviors>
+                    </PasswordBox>
 
-            <Button
-                Command="{Binding ExecuteCommand}"
-                CommandParameter="Login"
-                Content="登陆系统"
-                DockPanel.Dock="Top" />
-            <DockPanel LastChildFill="False">
-                <TextBlock Margin="0,5" Text="注册账号" />
-                <TextBlock
-                    Margin="0,5"
-                    DockPanel.Dock="Right"
-                    Text="忘记密码?" />
-            </DockPanel>
-        </DockPanel>
+                    <Button
+                        Command="{Binding ExecuteCommand}"
+                        CommandParameter="Login"
+                        Content="登陆系统"
+                        DockPanel.Dock="Top" />
+                    <DockPanel LastChildFill="False">
+                        <TextBlock Margin="0,5" Text="注册账号">
+                            <i:Interaction.Triggers>
+                                <i:EventTrigger EventName="MouseLeftButtonDown">
+                                    <i:InvokeCommandAction Command="{Binding ExecuteCommand}" CommandParameter="Go" />
+                                </i:EventTrigger>
+                            </i:Interaction.Triggers>
+                        </TextBlock>
+                        <TextBlock
+                            Margin="0,5"
+                            DockPanel.Dock="Right"
+                            Text="忘记密码?" />
+                    </DockPanel>
+                </DockPanel>
+            </md:TransitionerSlide>
+
+            <md:TransitionerSlide>
+                <DockPanel Margin="15" VerticalAlignment="Center">
+                    <TextBlock
+                        DockPanel.Dock="Top"
+                        FontSize="22"
+                        FontWeight="Bold"
+                        Text="注册账号" />
+                    <TextBox
+                        Margin="0,5"
+                        md:HintAssist.Hint="请输入账号"
+                        DockPanel.Dock="Top"
+                        Text="{Binding UserDto.Account}" />
+                    <TextBox
+                        Margin="0,5"
+                        md:HintAssist.Hint="请输入用户名"
+                        DockPanel.Dock="Top"
+                        Text="{Binding UserDto.UserName}" />
+                    <PasswordBox
+                        Margin="0,5"
+                        md:HintAssist.Hint="请输入密码"
+                        pass:PassWordExtensions.PassWord="{Binding UserDto.PassWord, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                        DockPanel.Dock="Top">
+                        <i:Interaction.Behaviors>
+                            <pass:PassWordBehavior />
+                        </i:Interaction.Behaviors>
+                    </PasswordBox>
+                    <PasswordBox
+                        Margin="0,5"
+                        md:HintAssist.Hint="请再次输入密码"
+                        pass:PassWordExtensions.PassWord="{Binding UserDto.NewPassWord, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                        DockPanel.Dock="Top">
+                        <i:Interaction.Behaviors>
+                            <pass:PassWordBehavior />
+                        </i:Interaction.Behaviors>
+                    </PasswordBox>
+                    <DockPanel LastChildFill="False">
+                        <Button
+                            Margin="2,5"
+                            Command="{Binding ExecuteCommand}"
+                            CommandParameter="Register"
+                            Content="注册账号"
+                            DockPanel.Dock="Left" />
+                        <Button
+                            Margin="2,5"
+                            Command="{Binding ExecuteCommand}"
+                            CommandParameter="Return"
+                            Content="返回登陆"
+                            DockPanel.Dock="Right" />
+                    </DockPanel>
+                </DockPanel>
+            </md:TransitionerSlide>
+        </md:Transitioner>
     </Grid>
 </UserControl>

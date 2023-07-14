@@ -1,4 +1,5 @@
 ﻿using MyToDo.Service;
+using MyToDo.Shared.Dtos;
 using Prism.Commands;
 using Prism.Mvvm;
 using Prism.Services.Dialogs;
@@ -16,6 +17,7 @@ namespace MyToDo.ViewModels.Dialogs
         private readonly ILoginService service;
         public LoginViewModel(ILoginService service)
         {
+            UserDto = new RegisterDto();
             ExecuteCommand = new DelegateCommand<string>(Execute);
             this.service = service;
         }
@@ -26,7 +28,34 @@ namespace MyToDo.ViewModels.Dialogs
             {
                 case "Login": Login();break;
                 case "LoginOut":LoginOut();break;
+                case "Go":SelectedIndex=1;break;//跳转注册页面
+                case "Return":SelectedIndex = 0;break;//返回登陆页面
+                case "Register": Register(); break;//注册页面注册
             }
+        }
+
+        private async void Register()
+        {
+
+            if (string.IsNullOrWhiteSpace(UserDto.Account) || string.IsNullOrWhiteSpace(UserDto.UserName) || string.IsNullOrWhiteSpace(UserDto.PassWord))
+                return;
+            if (!UserDto.PassWord.Equals(UserDto.NewPassWord))
+                //验证失败提示...
+                return;
+
+            var result=await service.RegisterAsync(new Shared.Dtos.UserDto() {
+                Account= UserDto.Account,
+                UserName=UserDto.UserName,
+                PassWord=UserDto.PassWord,
+            });
+
+            if(result!=null && result.Status)
+            {
+                //注册成功
+                SelectedIndex = 0;
+            }
+            //注册失败提示。。。
+
         }
 
         private void LoginOut()
@@ -77,6 +106,23 @@ namespace MyToDo.ViewModels.Dialogs
 
 
         #region 属性
+
+        private RegisterDto userDto;
+
+        public RegisterDto UserDto
+        {
+            get { return userDto; }
+            set { userDto = value;RaisePropertyChanged(); }
+        }
+
+
+        private int selectedIndex;
+
+        public int SelectedIndex
+        {
+            get { return selectedIndex; }
+            set { selectedIndex = value; RaisePropertyChanged(); }
+        }
         private string account;
 
         /// <summary>
