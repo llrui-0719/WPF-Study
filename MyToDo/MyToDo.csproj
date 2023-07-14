@@ -4,9 +4,11 @@
     <OutputType>WinExe</OutputType>
     <TargetFramework>net5.0-windows</TargetFramework>
     <UseWPF>true</UseWPF>
+    <ApplicationIcon>8664845_face_grin_tongue_icon.ico</ApplicationIcon>
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="Images\login.jpeg" />
     <None Remove="Images\user.jpg" />
   </ItemGroup>
 
@@ -27,6 +29,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Resource Include="Images\login.jpeg" />
     <Resource Include="Images\user.jpg" />
   </ItemGroup>
 

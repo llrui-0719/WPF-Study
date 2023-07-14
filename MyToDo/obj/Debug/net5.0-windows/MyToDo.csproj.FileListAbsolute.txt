@@ -90,3 +90,5 @@ D:\Study\Company_Study\C_Sharp_Company_Study\wpf\MyToDo\MyToDo\obj\Debug\net5.0-
 D:\Study\Company_Study\C_Sharp_Company_Study\wpf\MyToDo\MyToDo\obj\Debug\net5.0-windows\Views\Dialogs\AddToDoView.baml
 D:\Study\Company_Study\C_Sharp_Company_Study\wpf\MyToDo\MyToDo\obj\Debug\net5.0-windows\Views\MsgView.g.cs
 D:\Study\Company_Study\C_Sharp_Company_Study\wpf\MyToDo\MyToDo\obj\Debug\net5.0-windows\Views\MsgView.baml
+D:\Study\Company_Study\C_Sharp_Company_Study\wpf\MyToDo\MyToDo\obj\Debug\net5.0-windows\Views\LoginView.g.cs
+D:\Study\Company_Study\C_Sharp_Company_Study\wpf\MyToDo\MyToDo\obj\Debug\net5.0-windows\Views\LoginView.baml
