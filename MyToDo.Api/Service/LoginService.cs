@@ -25,9 +25,9 @@ namespace MyToDo.Api.Service
             try
             {
                 //加密
-                Password=Password.GetMD5();
-                var model=await work.GetRepository<User>().GetFirstOrDefaultAsync(predicate: t => 
-                t.Account.Equals(Account)
+                Password = Password.GetMD5();
+                var model = await work.GetRepository<User>().GetFirstOrDefaultAsync(predicate: t =>
+                  t.Account.Equals(Account)
                 &&
                 t.PassWord.Equals(Password));
                 if (model != null)

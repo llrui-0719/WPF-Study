@@ -27,7 +27,7 @@ namespace MyToDo.ViewModels
 
         public IndexViewModel(IContainerProvider provider,IDialogHostService dialog):base(provider)
         {
-            Title = $"{DateTime.Now.GetDateTimeFormats('D')[1].ToString()},你好大混子";
+            Title = $"{DateTime.Now.GetDateTimeFormats('D')[1].ToString()},你好{AppSession.UserName}";
             ExcuteCommand = new DelegateCommand<string>(Excute);
             EditMemoCommand = new DelegateCommand<MemoDto>(AddMemo);
             EditToDoCommand = new DelegateCommand<ToDoDto>(AddToDo);

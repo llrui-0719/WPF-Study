@@ -1,4 +1,5 @@
-﻿using MyToDo.Extensions;
+﻿using MyToDo.Common;
+using MyToDo.Extensions;
 using MyToDo.Service;
 using MyToDo.Shared.Dtos;
 using Prism.Commands;
@@ -87,6 +88,7 @@ namespace MyToDo.ViewModels.Dialogs
 
             if (loginresult.Status)
             {
+                AppSession.UserName = loginresult.Result.UserName;
                 RequestClose?.Invoke(new DialogResult(ButtonResult.OK));
                 return;
             }
