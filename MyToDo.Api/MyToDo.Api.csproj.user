@@ -5,5 +5,6 @@
   </PropertyGroup>
   <PropertyGroup>
     <ActiveDebugProfile>MyToDo.Api</ActiveDebugProfile>
+    <NameOfLastUsedPublishProfile>D:\Study\Company_Study\C_Sharp_Company_Study\wpf\MyToDo\MyToDo.Api\Properties\PublishProfiles\FolderProfile.pubxml</NameOfLastUsedPublishProfile>
   </PropertyGroup>
 </Project>

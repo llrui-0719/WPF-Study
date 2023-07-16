@@ -45,7 +45,29 @@ namespace MyToDo.Service
 
             client.BaseUrl = new Uri(apiurl + baseRequest.Route);
             var response = await client.ExecuteAsync(request);
-            return JsonConvert.DeserializeObject<ApiResponse<T>>(response.Content);
+
+            if (response.StatusCode == System.Net.HttpStatusCode.OK)
+            {
+                if (JsonConvert.DeserializeObject<ApiResponse>(response.Content).Status)
+                {
+                    return JsonConvert.DeserializeObject<ApiResponse<T>>(response.Content);
+                }
+                else
+                {
+                    return new ApiResponse<T>()
+                    {
+                        Status = false,
+                        Message = JsonConvert.DeserializeObject<ApiResponse>(response.Content).Result.ToString(),
+                    };
+                }
+            }
+            else
+            {
+                return new ApiResponse<T>() {
+                    Status=false,
+                    Message=response.ErrorMessage,
+                };
+            }
         }
     }
 }

@@ -1,0 +1,16 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<!--
+https://go.microsoft.com/fwlink/?LinkID=208121. 
+-->
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <TimeStampOfAssociatedLegacyPublishXmlFile />
+    <_PublishTargetUrl>D:\Study\Company_Study\C_Sharp_Company_Study\wpf\MyToDo\MyToDo.Api\bin\Release\net5.0\publish\</_PublishTargetUrl>
+    <History>True|2023-07-16T03:42:12.3765789Z;True|2023-07-16T11:08:36.9905107+08:00;</History>
+  </PropertyGroup>
+  <ItemGroup>
+    <DestinationConnectionStrings Include="ToDoConnection">
+      <Value>Data Source=to.db</Value>
+    </DestinationConnectionStrings>
+  </ItemGroup>
+</Project>

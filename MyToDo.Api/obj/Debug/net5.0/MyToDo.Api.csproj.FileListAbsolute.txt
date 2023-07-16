@@ -59,3 +59,4 @@ D:\Study\Company_Study\C_Sharp_Company_Study\wpf\MyToDo\MyToDo.Api\bin\Debug\net
 D:\Study\Company_Study\C_Sharp_Company_Study\wpf\MyToDo\MyToDo.Api\bin\Debug\net5.0\MyToDo.Shared.dll
 D:\Study\Company_Study\C_Sharp_Company_Study\wpf\MyToDo\MyToDo.Api\bin\Debug\net5.0\MyToDo.Shared.pdb
 D:\Study\Company_Study\C_Sharp_Company_Study\wpf\MyToDo\MyToDo.Api\bin\Debug\net5.0\AutoMapper.dll
+D:\Study\Company_Study\C_Sharp_Company_Study\wpf\MyToDo\MyToDo.Api\bin\Debug\net5.0\to.db

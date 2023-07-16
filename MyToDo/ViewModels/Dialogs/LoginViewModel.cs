@@ -86,7 +86,7 @@ namespace MyToDo.ViewModels.Dialogs
                 PassWord=PassWord,
             });
 
-            if (loginresult.Status)
+            if (loginresult!=null &&  loginresult.Status)
             {
                 AppSession.UserName = loginresult.Result.UserName;
                 RequestClose?.Invoke(new DialogResult(ButtonResult.OK));
@@ -94,7 +94,7 @@ namespace MyToDo.ViewModels.Dialogs
             }
 
             //登陆失败提示...
-            aggregator.SendMessage(loginresult.Result.ToString(), "Login");
+            aggregator.SendMessage(loginresult.Message, "Login");
 
         }
 
