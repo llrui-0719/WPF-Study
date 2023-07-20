@@ -1,13 +1,13 @@
 {
   "version": 2,
-  "dgSpecHash": "XnVnGOCp9T72dClhuUBDVYgS+s2xhoaaKCOV7G2TWy4qN0GT0HxItZc+gerB7vGrB3d1Lr/SIhWaDAnQLxZOhA==",
+  "dgSpecHash": "GJ1JkSNgMqePs6SYLlQq1j2m2gAs8MdG1icW0eCMhnsjy5gWFqJq52GXqn9MjCbbqYpOJf9ay/W/nO0F7KJtVw==",
   "success": true,
   "projectFilePath": "D:\\Study\\Company_Study\\C_Sharp_Company_Study\\wpf\\MyToDo\\MyToDo\\MyToDo.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\ksat\\.nuget\\packages\\dryioc.dll\\4.7.7\\dryioc.dll.4.7.7.nupkg.sha512",
     "C:\\Users\\ksat\\.nuget\\packages\\humanizer.core\\2.8.26\\humanizer.core.2.8.26.nupkg.sha512",
-    "C:\\Users\\ksat\\.nuget\\packages\\materialdesigncolors\\2.1.2\\materialdesigncolors.2.1.2.nupkg.sha512",
-    "C:\\Users\\ksat\\.nuget\\packages\\materialdesignthemes\\4.8.0\\materialdesignthemes.4.8.0.nupkg.sha512",
+    "C:\\Users\\ksat\\.nuget\\packages\\materialdesigncolors\\2.1.4\\materialdesigncolors.2.1.4.nupkg.sha512",
+    "C:\\Users\\ksat\\.nuget\\packages\\materialdesignthemes\\4.9.0\\materialdesignthemes.4.9.0.nupkg.sha512",
     "C:\\Users\\ksat\\.nuget\\packages\\microsoft.csharp\\4.7.0\\microsoft.csharp.4.7.0.nupkg.sha512",
     "C:\\Users\\ksat\\.nuget\\packages\\microsoft.data.sqlite.core\\5.0.9\\microsoft.data.sqlite.core.5.0.9.nupkg.sha512",
     "C:\\Users\\ksat\\.nuget\\packages\\microsoft.dotnet.platformabstractions\\3.1.6\\microsoft.dotnet.platformabstractions.3.1.6.nupkg.sha512",
