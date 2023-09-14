@@ -17,6 +17,31 @@
           }
         }
       },
+      "FreeSql/3.2.800": {
+        "runtime": {
+          "lib/netstandard2.1/FreeSql.dll": {
+            "assemblyVersion": "3.2.800.0",
+            "fileVersion": "3.2.800.0"
+          }
+        },
+        "resources": {
+          "lib/netstandard2.1/zh-Hans/FreeSql.resources.dll": {
+            "locale": "zh-Hans"
+          }
+        }
+      },
+      "FreeSql.Provider.Sqlite/3.2.800": {
+        "dependencies": {
+          "FreeSql": "3.2.800",
+          "System.Data.SQLite.Core": "1.0.115.5"
+        },
+        "runtime": {
+          "lib/netstandard2.0/FreeSql.Provider.Sqlite.dll": {
+            "assemblyVersion": "3.2.800.0",
+            "fileVersion": "3.2.800.0"
+          }
+        }
+      },
       "Humanizer.Core/2.8.26": {
         "runtime": {
           "lib/netstandard2.0/Humanizer.dll": {
@@ -414,6 +439,36 @@
           }
         }
       },
+      "Stub.System.Data.SQLite.Core.NetStandard/1.0.115.5": {
+        "runtime": {
+          "lib/netstandard2.1/System.Data.SQLite.dll": {
+            "assemblyVersion": "1.0.115.5",
+            "fileVersion": "1.0.115.5"
+          }
+        },
+        "runtimeTargets": {
+          "runtimes/linux-x64/native/SQLite.Interop.dll": {
+            "rid": "linux-x64",
+            "assetType": "native",
+            "fileVersion": "0.0.0.0"
+          },
+          "runtimes/osx-x64/native/SQLite.Interop.dll": {
+            "rid": "osx-x64",
+            "assetType": "native",
+            "fileVersion": "0.0.0.0"
+          },
+          "runtimes/win-x64/native/SQLite.Interop.dll": {
+            "rid": "win-x64",
+            "assetType": "native",
+            "fileVersion": "1.0.115.5"
+          },
+          "runtimes/win-x86/native/SQLite.Interop.dll": {
+            "rid": "win-x86",
+            "assetType": "native",
+            "fileVersion": "1.0.115.5"
+          }
+        }
+      },
       "System.Collections.Immutable/5.0.0": {
         "runtime": {
           "lib/netstandard2.0/System.Collections.Immutable.dll": {
@@ -428,6 +483,11 @@
             "assemblyVersion": "5.0.0.0",
             "fileVersion": "5.0.20.51904"
           }
+        }
+      },
+      "System.Data.SQLite.Core/1.0.115.5": {
+        "dependencies": {
+          "Stub.System.Data.SQLite.Core.NetStandard": "1.0.115.5"
         }
       },
       "System.Diagnostics.DiagnosticSource/5.0.1": {
@@ -520,6 +580,20 @@
       "sha512": "sha512-GC2JdW0mN3wTcbcteP7LWwfU1eao0If/vMozCXSbcNZbHQD7kBjcKFO82g0OLssr7gGPWS4+vWpNZ1oOy54JKw==",
       "path": "dryioc.dll/4.7.7",
       "hashPath": "dryioc.dll.4.7.7.nupkg.sha512"
+    },
+    "FreeSql/3.2.800": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-m+EOHUx9y5gdM0xKidNfT1/Zd2E8K664TOfpASdsEzVUXxn3Vd/27HrPKLWSN/6XgpolFJX8SP+ROFFtdF0Iqg==",
+      "path": "freesql/3.2.800",
+      "hashPath": "freesql.3.2.800.nupkg.sha512"
+    },
+    "FreeSql.Provider.Sqlite/3.2.800": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-FA9w64tTsnQQavju00wVEPfDDAfXiokxRSNFN+3f03Ei9eN7oAyrzCZ59DUvuG3+A+gJPPSIWBFqbDB6Vek1DA==",
+      "path": "freesql.provider.sqlite/3.2.800",
+      "hashPath": "freesql.provider.sqlite.3.2.800.nupkg.sha512"
     },
     "Humanizer.Core/2.8.26": {
       "type": "package",
@@ -773,6 +847,13 @@
       "path": "sqlitepclraw.provider.dynamic_cdecl/2.0.4",
       "hashPath": "sqlitepclraw.provider.dynamic_cdecl.2.0.4.nupkg.sha512"
     },
+    "Stub.System.Data.SQLite.Core.NetStandard/1.0.115.5": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-WfrqQg6WL+r4H1sVKTenNj6ERLXUukUxqcjH1rqPqXadeIWccTVpydESieD7cZ/NWQVSKLYIHuoBX5du+BFhIQ==",
+      "path": "stub.system.data.sqlite.core.netstandard/1.0.115.5",
+      "hashPath": "stub.system.data.sqlite.core.netstandard.1.0.115.5.nupkg.sha512"
+    },
     "System.Collections.Immutable/5.0.0": {
       "type": "package",
       "serviceable": true,
@@ -786,6 +867,13 @@
       "sha512": "sha512-dMkqfy2el8A8/I76n2Hi1oBFEbG1SfxD2l5nhwXV3XjlnOmwxJlQbYpJH4W51odnU9sARCSAgv7S3CyAFMkpYg==",
       "path": "system.componentmodel.annotations/5.0.0",
       "hashPath": "system.componentmodel.annotations.5.0.0.nupkg.sha512"
+    },
+    "System.Data.SQLite.Core/1.0.115.5": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-vADIqqgpxaC5xR6qOV8/KMZkQeSDCfmmWpVOtQx0oEr3Yjq2XdTxX7+jfE4+oO2xPovAbYiz6Q5cLRbSsDkq6Q==",
+      "path": "system.data.sqlite.core/1.0.115.5",
+      "hashPath": "system.data.sqlite.core.1.0.115.5.nupkg.sha512"
     },
     "System.Diagnostics.DiagnosticSource/5.0.1": {
       "type": "package",

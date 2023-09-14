@@ -12,12 +12,9 @@ namespace MyToDo.Service
     public class BaseService<TEntity> : IBaseService<TEntity> where TEntity : class
     {
 
-        private Func<TEntity, int> getIdFunc;
-        private Func<TEntity, DateTime> getDateFunc;
         public BaseService()
         {
-            getIdFunc = CreateIdGetter();
-            getDateFunc = CreateDateGetter();
+
         }
 
         private Func<TEntity, int> CreateIdGetter()
@@ -69,27 +66,6 @@ namespace MyToDo.Service
             }
         }
 
-        public async Task<ApiResponse<TEntity>> DeleteAsync(int id)
-        {
-            try
-            {
-                var info =await GetFirstorDefaultAsync(id);
-                if (info.Status)
-                {
-                    var result = DataBaseConnect.GetFreeSqlInstance().Delete<TEntity>(info.Result);
-
-                }
-                return new ApiResponse<TEntity>() {
-                    Status = false,
-                    Message=$"编号{id},数据未找到",
-                };
-            }
-            catch(Exception ex)
-            {
-                return new ApiResponse<TEntity>() { Status = false, Message = ex.Message };
-            }
-        }
-
         public async Task<ApiResponse<List<TEntity>>> GetAllAsync(QueryParameter query)
         {
             try
@@ -109,40 +85,7 @@ namespace MyToDo.Service
             }
         }
 
-        public async Task<ApiResponse<TEntity>> GetFirstorDefaultAsync(int id)
-        {
-            try
-            {
-                var info = await DataBaseConnect.GetFreeSqlInstance()
-                    .Select<TEntity>()
-                    .Where(t => getIdFunc(t) == id)
-                    .OrderByDescending(t => getDateFunc(t))
-                    .ToOneAsync();
-                if (info != null)
-                {
-                    return new ApiResponse<TEntity> {
-                        Status = true,
-                        Message = "",
-                        Result = info,
-                    };
-                }
-                else
-                {
-                    return new ApiResponse<TEntity>()
-                    {
-                        Status = false,
-                        Message = $"编号：{id}，未查询到数据!"
-                    };
-                };
-            }
-            catch(Exception ex)
-            {
-                return new ApiResponse<TEntity>() { 
-                    Status=false,
-                    Message=ex.Message,
-                };
-            }
-        }
+        
 
         public async Task<ApiResponse<TEntity>> UpdateAsync(TEntity entity)
         {

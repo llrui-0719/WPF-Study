@@ -9,5 +9,8 @@ namespace MyToDo.Service
 {
     public interface IMemoService:IBaseService<Memo>
     {
+        Task<ApiResponse<Memo>> GetFirstorDefaultAsync(int id);
+
+        Task<ApiResponse<Memo>> DeleteAsync(int id);
     }
 }

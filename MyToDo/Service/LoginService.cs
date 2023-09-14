@@ -18,7 +18,7 @@ namespace MyToDo.Service
         public async Task<ApiResponse<User>> LoginAsync(User user)
         {
             var password = StringExtensions.GetMD5(user.PassWord);
-            var info = await freeSql.Select<User>().Where(x => x.Id == user.Id && x.PassWord == password).ToOneAsync();
+            var info = await freeSql.Select<User>().Where(x => x.Account.Equals(user.Account) && x.PassWord.Equals(password)).ToOneAsync();
             if (info != null)
             {
                 return new ApiResponse<User>() {

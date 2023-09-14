@@ -11,8 +11,6 @@ namespace MyToDo.Service
     {
         ApiResponse<TEntity> Add(TEntity entity);
         Task<ApiResponse<TEntity>> UpdateAsync(TEntity entity);
-        Task<ApiResponse<TEntity>> DeleteAsync(int id);
-        Task<ApiResponse<TEntity>> GetFirstorDefaultAsync(int id);
         Task<ApiResponse<List<TEntity>>> GetAllAsync(QueryParameter query);
     }
 }

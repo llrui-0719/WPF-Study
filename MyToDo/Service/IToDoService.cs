@@ -13,5 +13,9 @@ namespace MyToDo.Service
     {
         Task<ApiResponse<List<ToDo>>> GetAllFilterAsync(ToDoParameter parameter);
 
+        Task<ApiResponse<ToDo>> GetFirstorDefaultAsync(int id);
+
+        Task<ApiResponse<ToDo>> DeleteAsync(int id);
+
     }
 }
