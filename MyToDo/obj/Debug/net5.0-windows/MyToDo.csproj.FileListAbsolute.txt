@@ -97,4 +97,3 @@ D:\Study\Company_Study\C_Sharp_Company_Study\wpf\MyToDo\MyToDo\bin\Debug\net5.0-
 D:\Study\Company_Study\C_Sharp_Company_Study\wpf\MyToDo\MyToDo\bin\Debug\net5.0-windows\runtimes\osx-x64\native\SQLite.Interop.dll
 D:\Study\Company_Study\C_Sharp_Company_Study\wpf\MyToDo\MyToDo\bin\Debug\net5.0-windows\runtimes\win-x64\native\SQLite.Interop.dll
 D:\Study\Company_Study\C_Sharp_Company_Study\wpf\MyToDo\MyToDo\bin\Debug\net5.0-windows\runtimes\win-x86\native\SQLite.Interop.dll
-D:\Study\Company_Study\C_Sharp_Company_Study\wpf\MyToDo\MyToDo\obj\Debug\net5.0-windows\MyToDo.csproj.AssemblyReference.cache
