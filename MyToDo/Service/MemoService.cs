@@ -1,4 +1,4 @@
-﻿using MyToDo.Shared.Dtos;
+﻿using MyToDo.Model;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -7,9 +7,9 @@ using System.Threading.Tasks;
 
 namespace MyToDo.Service
 {
-    public class MemoService : BaseService<MemoDto>, IMemoService
+    public class MemoService : BaseService<Memo>, IMemoService
     {
-        public MemoService(HttpRestClient client):base(client,"Memo")
+        public MemoService():base()
         {
 
         }

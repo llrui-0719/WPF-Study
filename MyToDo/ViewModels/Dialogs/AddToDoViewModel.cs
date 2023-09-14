@@ -1,6 +1,6 @@
 ﻿using MaterialDesignThemes.Wpf;
 using MyToDo.Common;
-using MyToDo.Shared.Dtos;
+using MyToDo.Model;
 using Prism.Commands;
 using Prism.Ioc;
 using Prism.Mvvm;
@@ -30,11 +30,11 @@ namespace MyToDo.ViewModels.Dialogs
         }
 
 
-        private ToDoDto model;
+        private ToDo model;
         /// <summary>
         /// 新增或编辑的实体
         /// </summary>
-        public ToDoDto Model
+        public ToDo Model
         {
             get { return model; }
             set { model = value; RaisePropertyChanged(); }
@@ -74,12 +74,12 @@ namespace MyToDo.ViewModels.Dialogs
         {
             if (parameters.ContainsKey("Value"))
             {
-                Model = parameters.GetValue<ToDoDto>("Value");
+                Model = parameters.GetValue<ToDo>("Value");
                 IsReadOnly = true;
             }
             else
             {
-                Model = new ToDoDto();
+                Model = new ToDo();
                 IsReadOnly = false;
             }
         }

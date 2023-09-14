@@ -1,9 +1,7 @@
-﻿using MyToDo.Shared;
-using MyToDo.Shared.Dtos;
+﻿using MyToDo.Extensions;
+using MyToDo.Model;
+using MyToDo.Singletons;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace MyToDo.Service
@@ -11,29 +9,61 @@ namespace MyToDo.Service
     public class LoginService : ILoginService
     {
 
-        private readonly HttpRestClient httpRestClient;
-        private readonly string serviceName = "Login";
-        public LoginService(HttpRestClient httpRestClient)
+        private readonly IFreeSql freeSql = DataBaseConnect.GetFreeSqlInstance();
+        public LoginService()
         {
-            this.httpRestClient = httpRestClient;
+
         }
 
-        public async Task<ApiResponse<UserDto>> LoginAsync(UserDto dto)
+        public async Task<ApiResponse<User>> LoginAsync(User user)
         {
-            BaseRequest request = new BaseRequest();
-            request.Method = RestSharp.Method.POST;
-            request.Route = $"api/{serviceName}/Login";
-            request.Parameter = dto;
-            return await httpRestClient.ExecuteAsync<UserDto>(request);
+            var password = StringExtensions.GetMD5(user.PassWord);
+            var info = await freeSql.Select<User>().Where(x => x.Id == user.Id && x.PassWord == password).ToOneAsync();
+            if (info != null)
+            {
+                return new ApiResponse<User>() {
+                    Status = true,
+                    Result=user,
+                };
+            }
+            else
+            {
+                return new ApiResponse<User>() {
+                    Status = false,
+                    Message="账号或密码错误",
+                };
+            }
         }
 
-        public async Task<ApiResponse> RegisterAsync(UserDto dto)
+        public ApiResponse Register(User user)
         {
-            BaseRequest request = new BaseRequest();
-            request.Method = RestSharp.Method.POST;
-            request.Route = $"api/{serviceName}/Register";
-            request.Parameter = dto;
-            return await httpRestClient.ExecuteAsync(request);
+            try
+            {
+                var password = StringExtensions.GetMD5(user.PassWord);
+                user.PassWord = password;
+                var info = freeSql.Insert<User>(user).ExecuteAffrows();
+                if (info > 0)
+                {
+                    return new ApiResponse()
+                    {
+                        Status = true,
+                        Message = "",
+                    };
+                }
+                return new ApiResponse() {
+                    Status=false,
+                    Message="数据入库失败！",
+                };
+            }
+            catch(Exception ex)
+            {
+                return new ApiResponse()
+                {
+                    Status = false,
+                    Message = ex.Message,
+                };
+            }
+           
         }
     }
 }

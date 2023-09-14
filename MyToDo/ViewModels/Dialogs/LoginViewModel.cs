@@ -1,7 +1,7 @@
 ﻿using MyToDo.Common;
 using MyToDo.Extensions;
+using MyToDo.Model;
 using MyToDo.Service;
-using MyToDo.Shared.Dtos;
 using Prism.Commands;
 using Prism.Events;
 using Prism.Mvvm;
@@ -22,7 +22,7 @@ namespace MyToDo.ViewModels.Dialogs
         private readonly IEventAggregator aggregator;
         public LoginViewModel(ILoginService service, IEventAggregator aggregator)
         {
-            UserDto = new RegisterDto();
+            UserDto = new RegisterUser();
             ExecuteCommand = new DelegateCommand<string>(Execute);
             this.service = service;
             this.aggregator = aggregator;
@@ -51,7 +51,7 @@ namespace MyToDo.ViewModels.Dialogs
                 aggregator.SendMessage("两次密码输入不一致！", "Login");
                 return;
             }
-            var result=await service.RegisterAsync(new Shared.Dtos.UserDto() {
+            var result=service.Register(new User() {
                 Account= UserDto.Account,
                 UserName=UserDto.UserName,
                 PassWord=UserDto.PassWord,
@@ -65,7 +65,7 @@ namespace MyToDo.ViewModels.Dialogs
                 return;
             }
             //注册失败提示。。。
-            aggregator.SendMessage(result.Result.ToString(), "Login");
+            aggregator.SendMessage(result.Message, "Login");
 
         }
 
@@ -81,7 +81,7 @@ namespace MyToDo.ViewModels.Dialogs
         {
             if (string.IsNullOrWhiteSpace(account) || string.IsNullOrWhiteSpace(passWord)) return;
 
-            var loginresult =await service.LoginAsync(new Shared.Dtos.UserDto() {
+            var loginresult =await service.LoginAsync(new User() {
                 Account=Account,
                 PassWord=PassWord,
             });
@@ -121,9 +121,9 @@ namespace MyToDo.ViewModels.Dialogs
 
         #region 属性
 
-        private RegisterDto userDto;
+        private RegisterUser userDto;
 
-        public RegisterDto UserDto
+        public RegisterUser UserDto
         {
             get { return userDto; }
             set { userDto = value;RaisePropertyChanged(); }

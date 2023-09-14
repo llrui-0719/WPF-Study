@@ -1,5 +1,4 @@
-﻿using MyToDo.Shared;
-using MyToDo.Shared.Dtos;
+﻿using MyToDo.Model;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,8 +9,8 @@ namespace MyToDo.Service
 {
     public interface ILoginService
     {
-        Task<ApiResponse<UserDto>> LoginAsync(UserDto dto);
+        Task<ApiResponse<User>> LoginAsync(User user);
 
-        Task<ApiResponse> RegisterAsync(UserDto dto);
+        ApiResponse Register(User user);
     }
 }

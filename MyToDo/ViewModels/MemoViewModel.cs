@@ -1,8 +1,9 @@
 ﻿using MyToDo.Common;
 using MyToDo.Common.Models;
 using MyToDo.Extensions;
+using MyToDo.Model;
+using MyToDo.Model.Parameter;
 using MyToDo.Service;
-using MyToDo.Shared.Dtos;
 using Prism.Commands;
 using Prism.Ioc;
 using Prism.Mvvm;
@@ -23,15 +24,15 @@ namespace MyToDo.ViewModels
 
         public MemoViewModel(IMemoService service, IContainerProvider container) : base(container)
         {
-            MemoDtos = new ObservableCollection<MemoDto>();
+            MemoDtos = new ObservableCollection<Memo>();
             ExcuteCommand = new DelegateCommand<String>(Excute);
-            SelectCommand = new DelegateCommand<MemoDto>(Selected);
-            DeleteCommand = new DelegateCommand<MemoDto>(Delete);
+            SelectCommand = new DelegateCommand<Memo>(Selected);
+            DeleteCommand = new DelegateCommand<Memo>(Delete);
             dialogHost = container.Resolve<IDialogHostService>();
             this.service = service;
         }
 
-        private async void Delete(MemoDto obj)
+        private async void Delete(Memo obj)
         {
             try
             {
@@ -99,12 +100,12 @@ namespace MyToDo.ViewModels
             set { isRightDrawerOpen = value; RaisePropertyChanged(); }
         }
 
-        private MemoDto currentDto;
+        private Memo currentDto;
 
         /// <summary>
         /// 编辑选中/新增时的对象
         /// </summary>
-        public MemoDto CurrentDto
+        public Memo CurrentDto
         {
             get { return currentDto; }
             set { currentDto = value; RaisePropertyChanged(); }
@@ -116,11 +117,11 @@ namespace MyToDo.ViewModels
         /// </summary>
         private void Add()
         {
-            CurrentDto = new MemoDto();
+            CurrentDto = new Memo();
             IsRightDrawerOpen = true;
         }
 
-        private async void Selected(MemoDto obj)
+        private async void Selected(Memo obj)
         {
             try
             {
@@ -168,7 +169,7 @@ namespace MyToDo.ViewModels
                 }
                 else
                 {
-                    var addresult = await service.AddAsync(currentDto);
+                    var addresult = service.Add(currentDto);
                     if (addresult.Status)
                     {
                         MemoDtos.Add(addresult.Result);
@@ -186,13 +187,13 @@ namespace MyToDo.ViewModels
         }
 
         public DelegateCommand<string> ExcuteCommand { get; private set; }
-        public DelegateCommand<MemoDto> SelectCommand { get; private set; }
-        public DelegateCommand<MemoDto> DeleteCommand { get; private set; }
+        public DelegateCommand<Memo> SelectCommand { get; private set; }
+        public DelegateCommand<Memo> DeleteCommand { get; private set; }
         private readonly IMemoService service;
 
-        private ObservableCollection<MemoDto> memoDtos;
+        private ObservableCollection<Memo> memoDtos;
 
-        public ObservableCollection<MemoDto> MemoDtos
+        public ObservableCollection<Memo> MemoDtos
         {
             get { return memoDtos; }
             set { memoDtos = value; RaisePropertyChanged(); }
@@ -205,7 +206,7 @@ namespace MyToDo.ViewModels
         {
             UpdateLoading(true);
 
-            var memoresult = await service.GetAllAsync(new Shared.Parameter.QueryParameter()
+            var memoresult = await service.GetAllAsync(new QueryParameter()
             {
                 PageIndex = 0,
                 PageSize = 100,
@@ -214,7 +215,7 @@ namespace MyToDo.ViewModels
             if (memoresult.Status)
             {
                 MemoDtos.Clear();
-                foreach (var info in memoresult.Result.Items)
+                foreach (var info in memoresult.Result)
                 {
                     MemoDtos.Add(info);
                 }

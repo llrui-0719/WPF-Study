@@ -14,6 +14,33 @@
           "lib/netstandard2.0/DryIoc.dll": {}
         }
       },
+      "FreeSql/3.2.800": {
+        "type": "package",
+        "compile": {
+          "lib/netstandard2.1/FreeSql.dll": {}
+        },
+        "runtime": {
+          "lib/netstandard2.1/FreeSql.dll": {}
+        },
+        "resource": {
+          "lib/netstandard2.1/zh-Hans/FreeSql.resources.dll": {
+            "locale": "zh-Hans"
+          }
+        }
+      },
+      "FreeSql.Provider.Sqlite/3.2.800": {
+        "type": "package",
+        "dependencies": {
+          "FreeSql": "3.2.800",
+          "System.Data.SQLite.Core": "1.0.115.5"
+        },
+        "compile": {
+          "lib/netstandard2.0/FreeSql.Provider.Sqlite.dll": {}
+        },
+        "runtime": {
+          "lib/netstandard2.0/FreeSql.Provider.Sqlite.dll": {}
+        }
+      },
       "Humanizer.Core/2.8.26": {
         "type": "package",
         "compile": {
@@ -493,6 +520,33 @@
           "lib/netstandard2.0/SQLitePCLRaw.provider.dynamic_cdecl.dll": {}
         }
       },
+      "Stub.System.Data.SQLite.Core.NetStandard/1.0.115.5": {
+        "type": "package",
+        "compile": {
+          "lib/netstandard2.1/System.Data.SQLite.dll": {}
+        },
+        "runtime": {
+          "lib/netstandard2.1/System.Data.SQLite.dll": {}
+        },
+        "runtimeTargets": {
+          "runtimes/linux-x64/native/SQLite.Interop.dll": {
+            "assetType": "native",
+            "rid": "linux-x64"
+          },
+          "runtimes/osx-x64/native/SQLite.Interop.dll": {
+            "assetType": "native",
+            "rid": "osx-x64"
+          },
+          "runtimes/win-x64/native/SQLite.Interop.dll": {
+            "assetType": "native",
+            "rid": "win-x64"
+          },
+          "runtimes/win-x86/native/SQLite.Interop.dll": {
+            "assetType": "native",
+            "rid": "win-x86"
+          }
+        }
+      },
       "System.Collections.Immutable/5.0.0": {
         "type": "package",
         "compile": {
@@ -509,6 +563,12 @@
         },
         "runtime": {
           "lib/netstandard2.1/System.ComponentModel.Annotations.dll": {}
+        }
+      },
+      "System.Data.SQLite.Core/1.0.115.5": {
+        "type": "package",
+        "dependencies": {
+          "Stub.System.Data.SQLite.Core.NetStandard": "[1.0.115.5]"
         }
       },
       "System.Diagnostics.DiagnosticSource/5.0.1": {
@@ -626,16 +686,6 @@
         "compile": {
           "ref/netstandard1.3/System.Threading.Tasks.dll": {}
         }
-      },
-      "MyToDo.Shared/1.0.0": {
-        "type": "project",
-        "framework": ".NETCoreApp,Version=v5.0",
-        "compile": {
-          "bin/placeholder/MyToDo.Shared.dll": {}
-        },
-        "runtime": {
-          "bin/placeholder/MyToDo.Shared.dll": {}
-        }
       }
     }
   },
@@ -669,6 +719,56 @@
         "lib/portable-net45+win8+wp8+wpa81/DryIoc.dll",
         "lib/portable-net45+win8+wp8+wpa81/DryIoc.xml",
         "readme.txt"
+      ]
+    },
+    "FreeSql/3.2.800": {
+      "sha512": "m+EOHUx9y5gdM0xKidNfT1/Zd2E8K664TOfpASdsEzVUXxn3Vd/27HrPKLWSN/6XgpolFJX8SP+ROFFtdF0Iqg==",
+      "type": "package",
+      "path": "freesql/3.2.800",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "freesql.3.2.800.nupkg.sha512",
+        "freesql.nuspec",
+        "lib/net40/FreeSql.dll",
+        "lib/net40/FreeSql.pdb",
+        "lib/net40/FreeSql.xml",
+        "lib/net40/zh-Hans/FreeSql.resources.dll",
+        "lib/net45/FreeSql.dll",
+        "lib/net45/FreeSql.pdb",
+        "lib/net45/FreeSql.xml",
+        "lib/net45/zh-Hans/FreeSql.resources.dll",
+        "lib/net451/FreeSql.dll",
+        "lib/net451/FreeSql.pdb",
+        "lib/net451/FreeSql.xml",
+        "lib/net451/zh-Hans/FreeSql.resources.dll",
+        "lib/netstandard2.0/FreeSql.dll",
+        "lib/netstandard2.0/FreeSql.pdb",
+        "lib/netstandard2.0/FreeSql.xml",
+        "lib/netstandard2.0/zh-Hans/FreeSql.resources.dll",
+        "lib/netstandard2.1/FreeSql.dll",
+        "lib/netstandard2.1/FreeSql.pdb",
+        "lib/netstandard2.1/FreeSql.xml",
+        "lib/netstandard2.1/zh-Hans/FreeSql.resources.dll",
+        "logo.png"
+      ]
+    },
+    "FreeSql.Provider.Sqlite/3.2.800": {
+      "sha512": "FA9w64tTsnQQavju00wVEPfDDAfXiokxRSNFN+3f03Ei9eN7oAyrzCZ59DUvuG3+A+gJPPSIWBFqbDB6Vek1DA==",
+      "type": "package",
+      "path": "freesql.provider.sqlite/3.2.800",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "freesql.provider.sqlite.3.2.800.nupkg.sha512",
+        "freesql.provider.sqlite.nuspec",
+        "lib/net40/FreeSql.Provider.Sqlite.dll",
+        "lib/net40/FreeSql.Provider.Sqlite.pdb",
+        "lib/net45/FreeSql.Provider.Sqlite.dll",
+        "lib/net45/FreeSql.Provider.Sqlite.pdb",
+        "lib/netstandard2.0/FreeSql.Provider.Sqlite.dll",
+        "lib/netstandard2.0/FreeSql.Provider.Sqlite.pdb",
+        "logo.png"
       ]
     },
     "Humanizer.Core/2.8.26": {
@@ -1445,6 +1545,27 @@
         "sqlitepclraw.provider.dynamic_cdecl.nuspec"
       ]
     },
+    "Stub.System.Data.SQLite.Core.NetStandard/1.0.115.5": {
+      "sha512": "WfrqQg6WL+r4H1sVKTenNj6ERLXUukUxqcjH1rqPqXadeIWccTVpydESieD7cZ/NWQVSKLYIHuoBX5du+BFhIQ==",
+      "type": "package",
+      "path": "stub.system.data.sqlite.core.netstandard/1.0.115.5",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "lib/netstandard2.0/System.Data.SQLite.dll",
+        "lib/netstandard2.0/System.Data.SQLite.dll.altconfig",
+        "lib/netstandard2.0/System.Data.SQLite.xml",
+        "lib/netstandard2.1/System.Data.SQLite.dll",
+        "lib/netstandard2.1/System.Data.SQLite.dll.altconfig",
+        "lib/netstandard2.1/System.Data.SQLite.xml",
+        "runtimes/linux-x64/native/SQLite.Interop.dll",
+        "runtimes/osx-x64/native/SQLite.Interop.dll",
+        "runtimes/win-x64/native/SQLite.Interop.dll",
+        "runtimes/win-x86/native/SQLite.Interop.dll",
+        "stub.system.data.sqlite.core.netstandard.1.0.115.5.nupkg.sha512",
+        "stub.system.data.sqlite.core.netstandard.nuspec"
+      ]
+    },
     "System.Collections.Immutable/5.0.0": {
       "sha512": "FXkLXiK0sVVewcso0imKQoOxjoPAj42R8HtjjbSjVPAzwDfzoyoznWxgA3c38LDbN9SJux1xXoXYAhz98j7r2g==",
       "type": "package",
@@ -1559,6 +1680,17 @@
         "system.componentmodel.annotations.nuspec",
         "useSharedDesignerContext.txt",
         "version.txt"
+      ]
+    },
+    "System.Data.SQLite.Core/1.0.115.5": {
+      "sha512": "vADIqqgpxaC5xR6qOV8/KMZkQeSDCfmmWpVOtQx0oEr3Yjq2XdTxX7+jfE4+oO2xPovAbYiz6Q5cLRbSsDkq6Q==",
+      "type": "package",
+      "path": "system.data.sqlite.core/1.0.115.5",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "system.data.sqlite.core.1.0.115.5.nupkg.sha512",
+        "system.data.sqlite.core.nuspec"
       ]
     },
     "System.Diagnostics.DiagnosticSource/5.0.1": {
@@ -2146,19 +2278,15 @@
         "system.threading.tasks.4.3.0.nupkg.sha512",
         "system.threading.tasks.nuspec"
       ]
-    },
-    "MyToDo.Shared/1.0.0": {
-      "type": "project",
-      "path": "../MyToDo.Shared/MyToDo.Shared.csproj",
-      "msbuildProject": "../MyToDo.Shared/MyToDo.Shared.csproj"
     }
   },
   "projectFileDependencyGroups": {
     "net5.0-windows7.0": [
+      "FreeSql >= 3.2.800",
+      "FreeSql.Provider.Sqlite >= 3.2.800",
       "MaterialDesignThemes >= 4.9.0",
       "Microsoft.EntityFrameworkCore.Sqlite >= 5.0.9",
       "Microsoft.EntityFrameworkCore.Tools >= 5.0.9",
-      "MyToDo.Shared >= 1.0.0",
       "Newtonsoft.Json >= 13.0.3",
       "Prism.DryIoc >= 8.1.97",
       "RestSharp >= 106.12.0"
@@ -2195,11 +2323,7 @@
       "frameworks": {
         "net5.0-windows7.0": {
           "targetAlias": "net5.0-windows",
-          "projectReferences": {
-            "D:\\Study\\Company_Study\\C_Sharp_Company_Study\\wpf\\MyToDo\\MyToDo.Shared\\MyToDo.Shared.csproj": {
-              "projectPath": "D:\\Study\\Company_Study\\C_Sharp_Company_Study\\wpf\\MyToDo\\MyToDo.Shared\\MyToDo.Shared.csproj"
-            }
-          }
+          "projectReferences": {}
         }
       },
       "warningProperties": {
@@ -2212,6 +2336,14 @@
       "net5.0-windows7.0": {
         "targetAlias": "net5.0-windows",
         "dependencies": {
+          "FreeSql": {
+            "target": "Package",
+            "version": "[3.2.800, )"
+          },
+          "FreeSql.Provider.Sqlite": {
+            "target": "Package",
+            "version": "[3.2.800, )"
+          },
           "MaterialDesignThemes": {
             "target": "Package",
             "version": "[4.9.0, )"

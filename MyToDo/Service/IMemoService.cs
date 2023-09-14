@@ -1,4 +1,4 @@
-﻿using MyToDo.Shared.Dtos;
+﻿using MyToDo.Model;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace MyToDo.Service
 {
-    public interface IMemoService:IBaseService<MemoDto>
+    public interface IMemoService:IBaseService<Memo>
     {
     }
 }

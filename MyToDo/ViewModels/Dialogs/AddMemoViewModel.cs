@@ -1,6 +1,6 @@
 ﻿using MaterialDesignThemes.Wpf;
 using MyToDo.Common;
-using MyToDo.Shared.Dtos;
+using MyToDo.Model;
 using Prism.Commands;
 using Prism.Mvvm;
 using Prism.Services.Dialogs;
@@ -20,11 +20,11 @@ namespace MyToDo.ViewModels.Dialogs
             CancelCommand = new DelegateCommand(Cancel);
         }
 
-        private MemoDto model;
+        private Memo model;
         /// <summary>
         /// 新增或编辑的实体
         /// </summary>
-        public MemoDto Model
+        public Memo Model
         {
             get { return model; }
             set { model = value; RaisePropertyChanged(); }
@@ -58,11 +58,11 @@ namespace MyToDo.ViewModels.Dialogs
         {
             if (parameters.ContainsKey("Value"))
             {
-                Model = parameters.GetValue<MemoDto>("Value");
+                Model = parameters.GetValue<Memo>("Value");
             }
             else
             {
-                Model = new MemoDto();
+                Model = new Memo();
             }
         }
     }
