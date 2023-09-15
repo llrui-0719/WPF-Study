@@ -40,7 +40,7 @@ namespace MyToDo.ViewModels.Dialogs
             }
         }
 
-        private async void Register()
+        private void Register()
         {
 
             if (string.IsNullOrWhiteSpace(UserDto.Account) || string.IsNullOrWhiteSpace(UserDto.UserName) || string.IsNullOrWhiteSpace(UserDto.PassWord))

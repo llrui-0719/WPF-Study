@@ -57,13 +57,13 @@
                         ItemsSource="{Binding MenuBars}">
                         <i:Interaction.Triggers>
                             <i:EventTrigger EventName="SelectionChanged">
-                                <i:InvokeCommandAction Command="{Binding NavigateCommand}" CommandParameter="{Binding ElementName=menubar, Path=SelectedItem}" />
+                                <i:InvokeCommandAction Command="{Binding NavigateCommand}" CommandParameter="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type ListBox}}, Path=SelectedItem}" />
                             </i:EventTrigger>
                         </i:Interaction.Triggers>
                         <ListBox.ItemTemplate>
                             <DataTemplate>
                                 <StackPanel Background="Transparent" Orientation="Horizontal">
-                                    <materialDesign:PackIcon Margin="15,0" Kind="{Binding icon}" />
+                                    <materialDesign:PackIcon Margin="15,0" Kind="{Binding Icon}" />
                                     <TextBlock Margin="10,0" Text="{Binding Title}" />
                                 </StackPanel>
                             </DataTemplate>
@@ -118,7 +118,7 @@
                             </materialDesign:PopupBox.ToggleContent>
 
                             <StackPanel>
-                                <Button Command="{Binding AppCenterCommand}" Content="个人中心" />
+                                <Button Content="个人中心" />
                                 <Button Command="{Binding LoginOutCommand}" Content="注销当前账户" />
                             </StackPanel>
                         </materialDesign:PopupBox>
@@ -156,7 +156,7 @@
                                 VerticalAlignment="Center"
                                 AutomationProperties.Name="Material Design In XAML Toolkit"
                                 FontSize="22"
-                                Text="猜猜我是谁" />
+                                Text="天下万般兵刃，唯有过往伤人最深" />
                         </StackPanel>
 
 

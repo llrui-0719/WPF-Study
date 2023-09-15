@@ -145,11 +145,10 @@ namespace MyToDo.ViewModels
                     IsRightDrawerOpen = true;
                     CurrentDto = result.Result;
                 }
-                
             }
-            catch(Exception ex)
+            catch(Exception)
             {
-
+                
             }
             finally
             {
@@ -168,30 +167,33 @@ namespace MyToDo.ViewModels
                 UpdateLoading(true);
                 if (currentDto.Id > 0)
                 {
+                    currentDto.UpdateDate = DateTime.Now;
                     var updateresult=await service.UpdateAsync(currentDto);
                     if (updateresult.Status)
                     {
                         var todo = ToDoDtos.FirstOrDefault(x => x.Id == currentDto.Id);
                         if (todo != null)
                         {
-                            todo.Title = currentDto.Title;
-                            todo.Content = currentDto.Content;
-                            todo.Status = currentDto.Status;
+                            ToDoDtos.Remove(todo);
+                            ToDoDtos.Add(updateresult.Result);
                             IsRightDrawerOpen = false;
                         }
                     }
                 }
                 else
                 {
+                    currentDto.CreateDate = DateTime.Now;
+                    currentDto.UpdateDate = DateTime.Now;
                     var addresult = service.Add(currentDto);
                     if (addresult.Status)
                     {
+                        addresult.Result.Id = int.Parse(addresult.Message);
                         ToDoDtos.Add(addresult.Result);
                         IsRightDrawerOpen = false;
                     }
                 }
             }
-            catch(Exception ex)
+            catch(Exception)
             {
             }
             finally
@@ -199,13 +201,13 @@ namespace MyToDo.ViewModels
                 UpdateLoading(false);
             }
         }
+        private readonly IToDoService service;
 
         public DelegateCommand<string> ExcuteCommand { get;private set; }
         public DelegateCommand<ToDo> SelectCommand { get; private set; }
         public DelegateCommand<ToDo> DeleteCommand { get; private set; }
 
         private ObservableCollection<ToDo> toDoDtos;
-        private readonly IToDoService service;
 
         public ObservableCollection<ToDo> ToDoDtos
         {

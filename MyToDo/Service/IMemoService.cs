@@ -1,4 +1,5 @@
 ﻿using MyToDo.Model;
+using MyToDo.Model.Parameter;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,5 +13,9 @@ namespace MyToDo.Service
         Task<ApiResponse<Memo>> GetFirstorDefaultAsync(int id);
 
         Task<ApiResponse<Memo>> DeleteAsync(int id);
+
+        Task<ApiResponse<Memo>> UpdateAsync(Memo entity);
+
+        Task<ApiResponse<List<Memo>>> GetAllAsync(QueryParameter query);
     }
 }

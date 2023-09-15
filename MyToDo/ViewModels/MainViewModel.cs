@@ -45,6 +45,7 @@ namespace MyToDo.ViewModels
                 App.LoginOut(containerProvider);
             });
             this.regionManager = regionManager;
+
         }
 
         private void Navigate(MenuBar obj)
@@ -54,7 +55,6 @@ namespace MyToDo.ViewModels
             regionManager.Regions[PrismManager.MainViewRegionName].RequestNavigate(obj.NameSpace,back=> {
                 journal = back.Context.NavigationService.Journal;
             });
-
         }
 
         public DelegateCommand<MenuBar> NavigateCommand { get;private set; }

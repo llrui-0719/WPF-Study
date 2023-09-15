@@ -23,7 +23,7 @@ namespace MyToDo.Service
             {
                 return new ApiResponse<User>() {
                     Status = true,
-                    Result=user,
+                    Result= info,
                 };
             }
             else

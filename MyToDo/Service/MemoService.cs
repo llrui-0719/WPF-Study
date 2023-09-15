@@ -1,4 +1,5 @@
 ﻿using MyToDo.Model;
+using MyToDo.Model.Parameter;
 using MyToDo.Singletons;
 using System;
 using System.Collections.Generic;
@@ -87,6 +88,56 @@ namespace MyToDo.Service
             catch (Exception ex)
             {
                 return new ApiResponse<Memo>() { Status = false, Message = ex.Message };
+            }
+        }
+
+        public async Task<ApiResponse<Memo>> UpdateAsync(Memo entity)
+        {
+            try
+            {
+                var info = await DataBaseConnect.GetFreeSqlInstance().Update<Memo>(entity.Id)
+                    .Set(a =>a.UpdateDate, entity.UpdateDate)
+                    .Set(a =>a.Title, entity.Title)
+                    .Set(a =>a.Content, entity.Content)
+                    .ExecuteAffrowsAsync();
+                if (info > 0)
+                {
+                    return new ApiResponse<Memo>()
+                    {
+                        Status = true,
+                        Message = "",
+                        Result = entity,
+                    };
+                }
+                return new ApiResponse<Memo>()
+                {
+                    Status = false,
+                    Message = "更新失败！",
+                };
+            }
+            catch (Exception ex)
+            {
+                return new ApiResponse<Memo>() { Status = false, Message = ex.Message };
+            }
+        }
+
+        public async Task<ApiResponse<List<Memo>>> GetAllAsync(QueryParameter parameter)
+        {
+            try
+            {
+                var select = freeSql.Select<Memo>().Where(a => string.IsNullOrEmpty(parameter.Search) ? a.Id >= 0 : a.Title.Contains(parameter.Search));
+                var total = await select.CountAsync();
+                var list = await select.Page(parameter.PageIndex, parameter.PageSize).ToListAsync();
+                return new ApiResponse<List<Memo>>()
+                {
+                    Status = true,
+                    Message = "",
+                    Result = list,
+                };
+            }
+            catch (Exception ex)
+            {
+                return new ApiResponse<List<Memo>>() { Status = false, Message = ex.Message };
             }
         }
     }

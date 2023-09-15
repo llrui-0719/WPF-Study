@@ -17,5 +17,7 @@ namespace MyToDo.Service
 
         Task<ApiResponse<ToDo>> DeleteAsync(int id);
 
+        Task<ApiResponse<ToDo>> UpdateAsync(ToDo entity);
+        ApiResponse<SummaryDto> SummaryAsync();
     }
 }

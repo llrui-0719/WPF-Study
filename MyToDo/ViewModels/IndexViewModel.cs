@@ -117,13 +117,13 @@ namespace MyToDo.ViewModels
                     else//新增
                     {
                         var addresult = todoService.Add(todo);
-                        //if (addresult.Status)
-                        //{
-                        //    summary.ToDoList.Add(addresult.Result);
-                        //    summary.Sum += 1;
-                        //    summary.CompletedRadio = (summary.CompletedCount / (double)summary.Sum).ToString("0%");
-                        //    this.Refresh();
-                        //}
+                        if (addresult.Status)
+                        {
+                            summary.ToDoList.Add(addresult.Result);
+                            summary.Sum += 1;
+                            summary.CompletedRadio = (summary.CompletedCount / (double)summary.Sum).ToString("0%");
+                            this.Refresh();
+                        }
                     }
                 }
                 finally
@@ -230,15 +230,14 @@ namespace MyToDo.ViewModels
 
         }
 
-        public override async void OnNavigatedTo(NavigationContext navigationContext)
+        public override void OnNavigatedTo(NavigationContext navigationContext)
         {
-            //var summaryResult=await todoService.SummaryAsync();
-            //if (summaryResult.Status)
-            //{
-            //    Summary = summaryResult.Result;
-            //    Refresh();
-            //}
-
+            var summaryResult = todoService.SummaryAsync();
+            if (summaryResult.Status)
+            {
+                Summary = summaryResult.Result;
+                Refresh();
+            }
             base.OnNavigatedTo(navigationContext);
         }
 

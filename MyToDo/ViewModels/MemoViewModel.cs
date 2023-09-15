@@ -158,11 +158,11 @@ namespace MyToDo.ViewModels
                     var updateresult = await service.UpdateAsync(currentDto);
                     if (updateresult.Status)
                     {
-                        var todo = MemoDtos.FirstOrDefault(x => x.Id == currentDto.Id);
-                        if (todo != null)
+                        var memo = MemoDtos.FirstOrDefault(x => x.Id == currentDto.Id);
+                        if (memo != null)
                         {
-                            todo.Title = currentDto.Title;
-                            todo.Content = currentDto.Content;
+                            MemoDtos.Remove(memo);
+                            MemoDtos.Add(updateresult.Result);
                             IsRightDrawerOpen = false;
                         }
                     }
@@ -172,6 +172,7 @@ namespace MyToDo.ViewModels
                     var addresult = service.Add(currentDto);
                     if (addresult.Status)
                     {
+                        addresult.Result.Id = int.Parse(addresult.Message);
                         MemoDtos.Add(addresult.Result);
                         IsRightDrawerOpen = false;
                     }
